@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ItemImageRepository;
-use App\Validator\Constraints\AtLeastOneRelation;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemImageRepository::class)]
@@ -24,10 +23,6 @@ class ItemImage
     #[ORM\ManyToOne(inversedBy: 'itemImages')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Product $product = null;
-
-    #[ORM\ManyToOne(inversedBy: 'itemImages')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Accessory $accessory = null;
 
     public function getId(): ?int
     {
@@ -66,18 +61,6 @@ class ItemImage
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
-
-        return $this;
-    }
-
-    public function getAccessory(): ?Accessory
-    {
-        return $this->accessory;
-    }
-
-    public function setAccessory(?Accessory $accessory): self
-    {
-        $this->accessory = $accessory;
 
         return $this;
     }

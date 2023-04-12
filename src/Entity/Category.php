@@ -21,13 +21,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class, orphanRemoval: true)]
     private Collection $products;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Accessory::class, orphanRemoval: true)]
-    private Collection $accessories;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->accessories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,36 +67,6 @@ class Category
             // set the owning side to null (unless already changed)
             if ($product->getCategory() === $this) {
                 $product->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Accessory>
-     */
-    public function getAccessories(): Collection
-    {
-        return $this->accessories;
-    }
-
-    public function addAccessory(Accessory $accessory): self
-    {
-        if (!$this->accessories->contains($accessory)) {
-            $this->accessories->add($accessory);
-            $accessory->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAccessory(Accessory $accessory): self
-    {
-        if ($this->accessories->removeElement($accessory)) {
-            // set the owning side to null (unless already changed)
-            if ($accessory->getCategory() === $this) {
-                $accessory->setCategory(null);
             }
         }
 
