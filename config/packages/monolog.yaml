@@ -1,6 +1,12 @@
 monolog:
-    channels:
-        - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+    channels: ['doctrine']
+    handlers:
+        doctrine:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.doctrine.log'
+            level: debug
+            channels: ['doctrine']
+
 
 when@dev:
     monolog:

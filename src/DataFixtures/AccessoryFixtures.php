@@ -19,9 +19,10 @@ class AccessoryFixtures extends Fixture implements DependentFixtureInterface
         $accessory->setPrice(100);
         $accessory->setCategory($this->getReference('category_accessoires'));
         $accessory->setGender($this->getReference(GenderFixtures::GENDER_FEMME));
+        $manager->persist($accessory);
+        
         $this->addReference(self::ACCESSORY_CHAPEAU, $accessory);
 
-        $manager->persist($accessory);
         $manager->flush();
     }
 
