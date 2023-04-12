@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
-use App\Form\ProductImageType;
+use App\Form\ItemImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -29,6 +29,6 @@ class ProductCrudController extends AbstractCrudController
         yield MoneyField::new('price')->setStoredAsCents(false)->setCurrency('EUR');
 
         yield FormField::addTab('Images')->setIcon('fas fa-images');
-        yield CollectionField::new('productImages')->setEntryType(ProductImageType::class)->onlyOnForms();
+        yield CollectionField::new('itemImages')->setEntryType(ItemImageType::class)->onlyOnForms();
     }
 }

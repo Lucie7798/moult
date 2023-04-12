@@ -33,12 +33,12 @@ class Accessory
     #[ORM\JoinColumn(nullable: false)]
     private ?Gender $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'accessory', targetEntity: ProductImage::class, orphanRemoval: true)]
-    private Collection $productImages;
+    #[ORM\OneToMany(mappedBy: 'accessory', targetEntity: ItemImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    private Collection $itemImages;
 
     public function __construct()
     {
-        $this->productImages = new ArrayCollection();
+        $this->itemImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,32 +107,37 @@ class Accessory
     }
 
     /**
-     * @return Collection<int, ProductImage>
+     * @return Collection<int, ItemImage>
      */
-    public function getProductImages(): Collection
+    public function getItemImages(): Collection
     {
-        return $this->productImages;
+        return $this->itemImages;
     }
 
-    public function addProductImage(ProductImage $productImage): self
+    public function addItemImage(ItemImage $itemImage): self
     {
-        if (!$this->productImages->contains($productImage)) {
-            $this->productImages->add($productImage);
-            $productImage->setAccessory($this);
+        if (!$this->itemImages->contains($itemImage)) {
+            $this->itemImages->add($itemImage);
+            $itemImage->setAccessory($this);
         }
 
         return $this;
     }
 
-    public function removeProductImage(ProductImage $productImage): self
+    public function removeItemImage(ItemImage $itemImage): self
     {
-        if ($this->productImages->removeElement($productImage)) {
+        if ($this->itemImages->removeElement($itemImage)) {
             // set the owning side to null (unless already changed)
-            if ($productImage->getAccessory() === $this) {
-                $productImage->setAccessory(null);
+            if ($itemImage->getAccessory() === $this) {
+                $itemImage->setAccessory(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

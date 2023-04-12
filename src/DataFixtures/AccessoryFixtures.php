@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class AccessoryFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const ACCESSORY_CHAPEAU = 'accessory_chapeau';
+
     public function load(ObjectManager $manager): void
     {
         $accessory = new Accessory();
@@ -16,7 +18,10 @@ class AccessoryFixtures extends Fixture implements DependentFixtureInterface
         $accessory->setDescription('description');
         $accessory->setPrice(100);
         $accessory->setCategory($this->getReference('category_accessoires'));
+        $accessory->setGender($this->getReference(GenderFixtures::GENDER_FEMME));
+        $this->addReference(self::ACCESSORY_CHAPEAU, $accessory);
 
+        $manager->persist($accessory);
         $manager->flush();
     }
 

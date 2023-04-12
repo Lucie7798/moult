@@ -17,8 +17,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $product->setName('Veste');
         $product->setPrice(100);
         $product->setDescription('Veste en jean');
-        $product->setGender($this->getReference('Homme'));
+        $product->setGender($this->getReference('gender_homme'));
         $product->setCategory($this->getReference('category_accessoires'));
+        $product->setGender($this->getReference(GenderFixtures::GENDER_HOMME));
         $manager->persist($product);
         $this->addReference(self::PRODUCT_VESTE, $product);
 

@@ -33,12 +33,12 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Gender $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductImage::class, orphanRemoval: true)]
-    private Collection $productImages;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ItemImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    private Collection $itemImages;
 
     public function __construct()
     {
-        $this->productImages = new ArrayCollection();
+        $this->itemImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,29 +107,29 @@ class Product
     }
 
     /**
-     * @return Collection<int, ProductImage>
+     * @return Collection<int, ItemImage>
      */
-    public function getProductImages(): Collection
+    public function getItemImages(): Collection
     {
-        return $this->productImages;
+        return $this->itemImages;
     }
 
-    public function addProductImage(ProductImage $productImage): self
+    public function addItemImage(ItemImage $itemImage): self
     {
-        if (!$this->productImages->contains($productImage)) {
-            $this->productImages->add($productImage);
-            $productImage->setProduct($this);
+        if (!$this->itemImages->contains($itemImage)) {
+            $this->itemImages->add($itemImage);
+            $itemImage->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeProductImage(ProductImage $productImage): self
+    public function removeItemImage(ItemImage $itemImage): self
     {
-        if ($this->productImages->removeElement($productImage)) {
+        if ($this->itemImages->removeElement($itemImage)) {
             // set the owning side to null (unless already changed)
-            if ($productImage->getProduct() === $this) {
-                $productImage->setProduct(null);
+            if ($itemImage->getProduct() === $this) {
+                $itemImage->setProduct(null);
             }
         }
 

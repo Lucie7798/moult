@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\ProductImage;
+use App\Entity\ItemImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductImageType extends AbstractType
+class ItemImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,7 +20,7 @@ class ProductImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ProductImage::class,
+            'data_class' => ItemImage::class,
         ]);
     }
 }

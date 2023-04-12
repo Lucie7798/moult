@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductImageRepository;
+use App\Repository\ItemImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProductImageRepository::class)]
-class ProductImage
+#[ORM\Entity(repositoryClass: ItemImageRepository::class)]
+class ItemImage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,11 +19,11 @@ class ProductImage
     #[ORM\Column]
     private ?int $position = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productImages')]
+    #[ORM\ManyToOne(inversedBy: 'itemImages')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productImages')]
+    #[ORM\ManyToOne(inversedBy: 'itemImages')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Accessory $accessory = null;
 
