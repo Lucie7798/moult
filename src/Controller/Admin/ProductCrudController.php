@@ -23,8 +23,8 @@ class ProductCrudController extends AbstractCrudController
     {
         yield FormField::addTab('Info générales')->setIcon('fas fa-info');
         yield Field::new('name');
-        yield AssociationField::new('category');
-        yield AssociationField::new('gender');
+        yield AssociationField::new('category')->setRequired(false);
+        yield AssociationField::new('gender')->setRequired(false);
         yield TextEditorField ::new('description');
         yield MoneyField::new('price')->setStoredAsCents(false)->setCurrency('EUR');
 
