@@ -36,6 +36,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ItemImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $itemImages;
 
+    #[ORM\Column]
+    private ?bool $isAccessory = false;
+
     public function __construct()
     {
         $this->itemImages = new ArrayCollection();
@@ -139,5 +142,17 @@ class Product
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function isIsAccessory(): ?bool
+    {
+        return $this->isAccessory;
+    }
+
+    public function setIsAccessory(?bool $isAccessory): self
+    {
+        $this->isAccessory = $isAccessory;
+
+        return $this;
     }
 }
