@@ -11,4 +11,8 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-import 'tw-elements';
+import { Collapse, Dropdown, initTE } from 'tw-elements';
+
+initTE({ Collapse, Dropdown });
+
+
