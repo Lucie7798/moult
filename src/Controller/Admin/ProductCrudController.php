@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ItemImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -18,6 +19,14 @@ class ProductCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Product::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, 'product.list_title')
+            ->setPageTitle(Crud::PAGE_NEW, 'product.new_title')
+            ->setPageTitle(Crud::PAGE_EDIT, 'product.edit_title');
     }
 
     public function configureFilters(Filters $filters): Filters

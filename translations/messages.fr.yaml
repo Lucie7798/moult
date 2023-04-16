@@ -3,6 +3,9 @@ user:
     password: "Mot de passe"
     roles: "Rôles"
     updated_at: "Date de mise à jour"
+    list_title: "Liste des utilisateurs"
+    new_title: "Ajouter un utilisateur"
+    edit_title: "Modifier un utilisateur"
 
 product:
     name: "Nom du produit"
@@ -10,6 +13,9 @@ product:
     category: "Catégorie"
     gender: "Genre"
     itemImages: "Images"
+    list_title: "Liste des produits"
+    new_title: "Ajouter un produit"
+    edit_title: "Modifier un produit"
 
 category:
     name: "Nom de la catégorie"
