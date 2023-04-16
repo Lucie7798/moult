@@ -3,7 +3,6 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
-use Doctrine\ORM\Events;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class HashPasswordListener

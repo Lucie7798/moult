@@ -32,13 +32,13 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addTab('Info générales')->setIcon('fas fa-info');
-        yield Field::new('name');
-        yield AssociationField::new('category')->setRequired(false);
-        yield AssociationField::new('gender')->setRequired(false);
+        yield Field::new('name')->setLabel('product.name');
+        yield AssociationField::new('category')->setLabel('product.category')->setRequired(false);
+        yield AssociationField::new('gender')->setLabel('product.gender')->setRequired(false);
         yield TextEditorField ::new('description')->hideOnIndex();
-        yield MoneyField::new('price')->setStoredAsCents(false)->setCurrency('EUR');
+        yield MoneyField::new('price')->setLabel('product.price')->setStoredAsCents(false)->setCurrency('EUR');
 
         yield FormField::addTab('Images')->setIcon('fas fa-images');
-        yield CollectionField::new('itemImages')->setEntryType(ItemImageType::class)->onlyOnForms();
+        yield CollectionField::new('itemImages')->setLabel('product.itemImages')->setEntryType(ItemImageType::class)->onlyOnForms();
     }
 }

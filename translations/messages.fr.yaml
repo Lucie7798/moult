@@ -1,0 +1,16 @@
+user:
+    email: "Adresse e-mail"
+    password: "Mot de passe"
+    roles: "Rôles"
+    updated_at: "Date de mise à jour"
+
+product:
+    name: "Nom du produit"
+    price: "Prix"
+    category: "Catégorie"
+    gender: "Genre"
+    itemImages: "Images"
+
+category:
+    name: "Nom de la catégorie"
+
