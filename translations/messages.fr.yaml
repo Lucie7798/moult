@@ -3,7 +3,7 @@ user:
     password: "Mot de passe"
     roles: "Rôles"
     updated_at: "Date de mise à jour"
-    list_title: "Liste des utilisateurs"
+    list_title: "Moult - Administration des utilisateurs"
     new_title: "Ajouter un utilisateur"
     edit_title: "Modifier un utilisateur"
 

@@ -130,6 +130,11 @@ class Product
         return $this;
     }
 
+    public function getFirstImage(): ?ItemImage
+    {
+        return $this->itemImages->first() ?: null;
+    }
+
     public function removeItemImage(ItemImage $itemImage): self
     {
         if ($this->itemImages->removeElement($itemImage)) {
@@ -158,4 +163,5 @@ class Product
 
         return $this;
     }
+
 }

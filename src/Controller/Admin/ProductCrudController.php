@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ItemImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -34,8 +36,12 @@ class ProductCrudController extends AbstractCrudController
         return $filters
             ->add('name')
             ->add('price')
-            ->add('category')
-        ;
+            ->add('category');
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
 
     public function configureFields(string $pageName): iterable
@@ -44,10 +50,12 @@ class ProductCrudController extends AbstractCrudController
         yield Field::new('name')->setLabel('product.name');
         yield AssociationField::new('category')->setLabel('product.category')->setRequired(false);
         yield AssociationField::new('gender')->setLabel('product.gender')->setRequired(false);
-        yield TextEditorField ::new('description')->hideOnIndex();
+        yield TextEditorField::new('description')->hideOnIndex();
         yield MoneyField::new('price')->setLabel('product.price')->setStoredAsCents(false)->setCurrency('EUR');
 
         yield FormField::addTab('Images')->setIcon('fas fa-images');
-        yield CollectionField::new('itemImages')->setLabel('product.itemImages')->setEntryType(ItemImageType::class)->onlyOnForms();
+        yield CollectionField::new('itemImages')->setLabel('product.itemImages')
+            ->setTemplatePath('admin/product/images.html.twig')
+            ->setEntryType(ItemImageType::class);
     }
 }

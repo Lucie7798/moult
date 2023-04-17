@@ -28,3 +28,8 @@ services:
         tags:
             - { name: doctrine.orm.entity_listener, entity: App\Entity\User, event: prePersist, method: hashPassword }
             - { name: doctrine.orm.entity_listener, entity: App\Entity\User, event: preUpdate, method: hashPassword }
+
+    App\Admin\Field\VichImageField:
+        tags: ['easyadmin.field']
+
+
