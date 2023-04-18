@@ -36,7 +36,8 @@ class ProductCrudController extends AbstractCrudController
         return $filters
             ->add('name')
             ->add('price')
-            ->add('category');
+            ->add('category')
+            ->add('gender');
     }
 
     public function configureActions(Actions $actions): Actions
