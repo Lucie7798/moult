@@ -42,9 +42,13 @@ class Product
     #[ORM\Column]
     private ?bool $isAccessory = false;
 
+    #[ORM\OneToMany(mappedBy: 'jacket', targetEntity: SleeveOption::class, orphanRemoval: true)]
+    private Collection $sleeveOptions;
+
     public function __construct()
     {
         $this->itemImages = new ArrayCollection();
+        $this->sleeveOptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +159,36 @@ class Product
     public function setIsAccessory(?bool $isAccessory): self
     {
         $this->isAccessory = $isAccessory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeveOption>
+     */
+    public function getSleeveOptions(): Collection
+    {
+        return $this->sleeveOptions;
+    }
+
+    public function addSleeveOption(SleeveOption $sleeveOption): self
+    {
+        if (!$this->sleeveOptions->contains($sleeveOption)) {
+            $this->sleeveOptions->add($sleeveOption);
+            $sleeveOption->setJacket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSleeveOption(SleeveOption $sleeveOption): self
+    {
+        if ($this->sleeveOptions->removeElement($sleeveOption)) {
+            // set the owning side to null (unless already changed)
+            if ($sleeveOption->getJacket() === $this) {
+                $sleeveOption->setJacket(null);
+            }
+        }
 
         return $this;
     }
