@@ -12,3 +12,12 @@ liip_imagine:
             filters:
                 thumbnail:
                     size: [150, 150]
+
+        header_image:
+            filters:
+                # Redimensionnement proportionnel pour une largeur maximale de 1920px
+                relative_resize: { widen: 1920 }
+                # Compression de qualité pour les images JPEG
+                quality: { quality: 85 }
+                # Compression de qualité pour les images PNG
+                png_compression: { level: 6 }
