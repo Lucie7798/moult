@@ -6,14 +6,9 @@ vich_uploader:
 
     mappings:
         products:
-            uri_prefix: /images/products
-            upload_destination: '%kernel.project_dir%/public/images/products'
+            uri_prefix: uploads/images/products
+            upload_destination: '%kernel.project_dir%/public/uploads/images/products'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-
-        header_images:
-                    uri_prefix: /uploads/header_images
-                    upload_destination: '%kernel.project_dir%/public/uploads/header_images'
-                    namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
 
     #mappings:

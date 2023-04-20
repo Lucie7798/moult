@@ -3,9 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use App\Entity\HeaderImage;
+use App\Entity\Header;
 use App\Entity\Product;
-use App\Entity\SleeveOption;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -46,7 +45,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Product::class);
-        yield MenuItem::linkToCrud('Images d\'entête', 'fas fa-list', HeaderImage::class);
+        yield MenuItem::linkToCrud('Headers', 'fas fa-desktop', Header::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
     }
 }

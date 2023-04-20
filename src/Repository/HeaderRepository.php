@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\HeaderImage;
+use App\Entity\Header;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<HeaderImage>
+ * @extends ServiceEntityRepository<Header>
  *
- * @method HeaderImage|null find($id, $lockMode = null, $lockVersion = null)
- * @method HeaderImage|null findOneBy(array $criteria, array $orderBy = null)
- * @method HeaderImage[]    findAll()
- * @method HeaderImage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Header|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Header|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Header[]    findAll()
+ * @method Header[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HeaderImageRepository extends ServiceEntityRepository
+class HeaderRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, HeaderImage::class);
+        parent::__construct($registry, Header::class);
     }
 
-    public function save(HeaderImage $entity, bool $flush = false): void
+    public function save(Header $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class HeaderImageRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(HeaderImage $entity, bool $flush = false): void
+    public function remove(Header $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class HeaderImageRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return HeaderImage[] Returns an array of HeaderImage objects
+//     * @return Header[] Returns an array of Header objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class HeaderImageRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?HeaderImage
+//    public function findOneBySomeField($value): ?Header
 //    {
 //        return $this->createQueryBuilder('h')
 //            ->andWhere('h.exampleField = :val')
