@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
@@ -48,6 +49,7 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addTab('Info générales')->setIcon('fas fa-info');
+        yield IdField::new('id')->hideOnForm();
         yield Field::new('name')->setLabel('product.name');
         yield AssociationField::new('category')->setLabel('product.category')->setRequired(false);
         yield AssociationField::new('gender')->setLabel('product.gender')->setRequired(false);

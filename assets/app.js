@@ -11,8 +11,16 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-import { Collapse, Dropdown, initTE } from 'tw-elements';
+import { 
+    Collapse, 
+    Dropdown, 
+    Ripple, 
+    initTE 
+} from 'tw-elements';
 
-initTE({ Collapse, Dropdown });
+initTE({ Collapse, Dropdown, Ripple });
+
+// enable the interactive UI components from Flowbite
+import 'flowbite';
 
 

@@ -13,7 +13,9 @@ class ItemImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pathFile', VichImageType::class)
+            ->add('pathFile', VichImageType::class, [
+                'label' => 'Image',
+            ])
             ->add('position')
         ;
     }
