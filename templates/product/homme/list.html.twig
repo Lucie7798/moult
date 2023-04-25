@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les produits pour Homme
+{% endblock %}
+
+{% block body %}
+
+	<section class="row">
+		{% for product in products %}
+			<div class="col-4">
+				<h2>{{ product.name }}</h2>
+				<p>{{ product.description | striptags | u.truncate(10, '...', false) }}</p>
+			</div>
+		{% endfor %}
+{% endblock %}
+
