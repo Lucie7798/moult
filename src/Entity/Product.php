@@ -13,7 +13,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Product
 {
     use TimestampableEntity;
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -45,10 +45,20 @@ class Product
     #[ORM\OneToMany(mappedBy: 'jacket', targetEntity: SleeveOption::class, orphanRemoval: true)]
     private Collection $sleeveOptions;
 
+    #[ORM\ManyToMany(targetEntity: Size::class, inversedBy: 'products')]
+    #[ORM\JoinTable(name: "product_size")]
+    private Collection $sizes;
+
+    #[ORM\ManyToMany(targetEntity: Color::class, inversedBy: 'products')]
+    #[ORM\JoinTable(name: "product_color")]
+    private Collection $colors;
+
     public function __construct()
     {
         $this->itemImages = new ArrayCollection();
         $this->sleeveOptions = new ArrayCollection();
+        $this->sizes = new ArrayCollection();
+        $this->colors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,4 +203,51 @@ class Product
         return $this;
     }
 
+    public function getSize(): Collection
+    {
+        return $this->sizes;
+    }
+
+    public function addSize(Size $size): self
+    {
+        if (!$this->sizes->contains($size)) {
+            $this->sizes->add($size);
+            $size->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSize(Size $size): self
+    {
+        if ($this->sizes->removeElement($size)) {
+            $size->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function getColor(): Collection
+    {
+        return $this->colors;
+    }
+
+    public function addColor(Color $color): self
+    {
+        if (!$this->colors->contains($color)) {
+            $this->colors->add($color);
+            $color->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeColor(Color $color): self
+    {
+        if ($this->colors->removeElement($color)) {
+            $color->removeProduct($this);
+        }
+
+        return $this;
+    }
 }
