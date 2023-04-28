@@ -23,4 +23,12 @@ initTE({ Collapse, Dropdown, Ripple });
 // enable the interactive UI components from Flowbite
 import 'flowbite';
 
+// enable the custom scripts
+import './custom';
+
+
+  
+
+  
+
 
