@@ -4,31 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container mx-auto px-4 mt-6">
-		<h1 class="text-3xl font-semibold mb-6">Produits pour Femme</h1>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-			{% for product in products %}
-				<div class="fb-card w-full h-full">
-					<a href="{{ path('app_product', {'id': product.id}) }}" class="fb-card-media">
-						<img class="object-cover object-center w-full h-48" src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) }}" alt="Image de {{ product.name }}"/>
-					</a>
-					<div class="fb-card-body">
-						<a href="{{ path('app_product', {'id': product.id}) }}">
-							<h5 class="fb-card-title">{{ product.name }}</h5>
-						</a>
-						<p class="fb-card-text">{{ product.description|striptags }}</p>
-						<div class="flex items-center justify-between mt-5">
-							<div class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
-								€</div>
-							<div class="flex items-center space-x-2">
-								<a href="#" class="fb-button fb-button-primary">Ajouter au panier</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	</section>
+    {{ header|raw }} {# afficher le header #}
+    <section class="container mx-auto px-4 mt-6">
+        <h1 class="text-3xl font-semibold mb-6">Produits pour Femme</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {% for product in products %}
+                <div class="fb-card w-full h-full">
+                    <a href="{{ path('app_product', {'id': product.id}) }}" class="fb-card-media">
+                        <img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}"/>
+                    </a>
+                    <div class="fb-card-body">
+                        <a href="{{ path('app_product', {'id': product.id}) }}">
+                            <h5 class="fb-card-title">{{ product.name }}</h5>
+                        </a>
+                        <p class="fb-card-text">{{ product.description|striptags }}</p>
+                        <div class="flex items-center justify-between mt-5">
+                            <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
+                                €</div>
+                            <div class="flex items-center space-x-2">
+                                <a href="#" class="fb-button fb-button-primary">Ajouter au panier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
-
-

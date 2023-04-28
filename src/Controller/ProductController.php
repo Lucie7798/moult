@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Header;
 use App\Repository\GenderRepository;
 use App\Repository\ProductRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,32 +14,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private $productRepository;
+    private $genderRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, GenderRepository $genderRepository)
     {
         $this->productRepository = $productRepository;
+        $this->genderRepository = $genderRepository;
     }
-
+    
     #[Route("/homme", name: "app_products_homme")]
 
-    public function listHomme(GenderRepository $genderRepository): Response
+    public function listHomme(ManagerRegistry $doctrine): Response
     {
-        $homme = $genderRepository->findOneBy(['name' => 'homme']);
+        $headerRepository = $doctrine->getRepository(Header::class);
+        $header = $headerRepository->findOneBy([]);
+        $homme = $this->genderRepository->findOneBy(['name' => 'femme']);
         $products = $this->productRepository->findBy(['gender' => $homme]);
 
         return $this->render('product/homme/list.html.twig', [
+            'header' => $header,
             'products' => $products,
         ]);
     }
 
     #[Route("/femme", name: "app_products_femme")]
 
-    public function listFemme(GenderRepository $genderRepository): Response
+    public function listFemme(ManagerRegistry $doctrine): Response
     {
-        $femme = $genderRepository->findOneBy(['name' => 'femme']);
+        $headerRepository = $doctrine->getRepository(Header::class);
+        $header = $headerRepository->findOneBy([]);
+        $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
         $products = $this->productRepository->findBy(['gender' => $femme]);
 
         return $this->render('product/femme/list.html.twig', [
+            'header' => $header,
             'products' => $products,
         ]);
     }

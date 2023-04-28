@@ -20,3 +20,12 @@ product:
 category:
     name: "Nom de la catégorie"
 
+header:
+    title: "Titre de l'en-tête"
+    image: "Image d'en-tête"
+    list_title: "Liste des en-têtes"
+    new_title: "Ajouter un en-tête"
+    edit_title: "Modifier un en-tête"
+    buttonTitle: "Titre du bouton"
+    buttonUrl: "Lien du bouton"
+

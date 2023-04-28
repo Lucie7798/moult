@@ -39,6 +39,17 @@ class HeaderRepository extends ServiceEntityRepository
         }
     }
 
+    public function findActiveHeader(): ?Header
+    {
+        return $this->createQueryBuilder('h')
+            ->where('h.active = :active')
+            ->setParameter('active', true)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
 //    /**
 //     * @return Header[] Returns an array of Header objects
 //     */
