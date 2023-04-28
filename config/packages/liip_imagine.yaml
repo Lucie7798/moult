@@ -12,12 +12,47 @@ liip_imagine:
             filters:
                 thumbnail:
                     size: [150, 150]
+                    mode: outbound
 
-        header_image:
+        header_thumbnail:
             filters:
-                # Redimensionnement proportionnel pour une largeur maximale de 1920px
-                relative_resize: { widen: 1920 }
-                # Compression de qualité pour les images JPEG
-                quality: { quality: 85 }
-                # Compression de qualité pour les images PNG
-                png_compression: { level: 6 }
+                thumbnail:
+                    size: [1600, 900] # Largeur et hauteur souhaitées
+                    mode: outbound
+
+        navbar_logo_thumbnail:
+            filters:
+                relative_resize:
+                    widen: 731
+
+        product_thumbnail:
+            filters:
+                thumbnail:
+                    size: [460, 575] # Largeur et hauteur souhaitées pour les produits
+                    mode: outbound
+
+        header_large:
+            filters:
+                thumbnail:
+                    size: [1600, 900]
+                    mode: outbound
+
+        header_medium:
+            filters:
+                thumbnail:
+                    size: [1024, 576]
+                    mode: outbound
+
+        header_small:
+            filters:
+                thumbnail:
+                    size: [768, 432]
+                    mode: outbound
+
+        header_default:
+            filters:
+                thumbnail:
+                    size: [480, 270]
+                    mode: outbound
+
+
