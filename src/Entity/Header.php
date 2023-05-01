@@ -44,6 +44,9 @@ class Header
     #[Assert\NotBlank(groups: ["create"], message: "Please upload an image.")]
     private ?File $imageFile = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $page = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +143,18 @@ class Header
     public function __toString(): string
     {
         return $this->getTitle();
+    }
+
+    public function getPage(): ?string
+    {
+        return $this->page;
+    }
+
+    public function setPage(?string $page): self
+    {
+        $this->page = $page;
+
+        return $this;
     }
 }
 
