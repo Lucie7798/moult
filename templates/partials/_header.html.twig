@@ -2,7 +2,6 @@
 	{% if header is not null %}
 		<div class="relative w-full" style="height: 75vh;">
 			<img src="{{ vich_uploader_asset(header, 'imageFile')|imagine_filter('header_thumbnail') }}" alt="{{ header.title }}" class="object-cover w-full h-full">
-			<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black to-transparent opacity-60"></div>
 			<div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
 				<div class="text-center text-white">
 					<h1 class="text-4xl font-semibold">{{ header.title }}</h1>

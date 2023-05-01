@@ -4,13 +4,6 @@
 {% endblock %}
 
 {% block body %}
-
-	<section class="row">
-		{% for product in products %}
-			<div class="col-4">
-				<h2>{{ product.name }}</h2>
-				<p>{{ product.description | striptags | u.truncate(10, '...', false) }}</p>
-			</div>
-		{% endfor %}
+	{% include 'partials/_product_card.html.twig' with {'products': products, 'sectionTitle': "Produits pour Homme"} %}
 {% endblock %}
 
