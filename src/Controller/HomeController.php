@@ -18,4 +18,14 @@ class HomeController extends AbstractController
             'header' => $header,
         ]);
     }
+
+    #[Route("/notre-histoire", name: "app_our_story")]
+    public function ourStory(HeaderRepository $headerRepository): Response
+    {
+        $header = $headerRepository->findActiveHeaderForPage('our_story');
+
+        return $this->render('static_pages/notre_histoire.html.twig', [ // Mettez à jour le chemin ici
+            'header' => $header,
+        ]);
+    }
 }
