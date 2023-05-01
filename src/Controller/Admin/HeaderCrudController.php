@@ -48,6 +48,13 @@ class HeaderCrudController extends AbstractCrudController
     {
         // Informations générales (title, description, buttonTitle, buttonUrl)
         yield FormField::addTab('Informations générales')->setIcon('fas fa-info');
+        yield ChoiceField::new('page')->setLabel('header.header.page')
+            ->setChoices([
+                'Accueil' => 'home',
+                'Homme' => 'homme',
+                'Femme' => 'femme',
+                // Ajoutez d'autres choix de pages ici, si nécessaire
+            ]);
         yield TextField::new('title')->setLabel('header.title');
         yield TextareaField::new('description');
         yield Field::new('active')->setLabel('Publier l\'entête ?');
@@ -60,7 +67,7 @@ class HeaderCrudController extends AbstractCrudController
             ]);
 
         // Images
-        yield FormField::addTab('Images')->setIcon('fas fa-images');
+        yield FormField::addTab('Image')->setIcon('fas fa-images');
         if ($pageName === Crud::PAGE_INDEX || $pageName === Crud::PAGE_DETAIL) {
             $imageField = ImageField::new('image')
                 ->setBasePath('/uploads/images/headers')
@@ -68,6 +75,11 @@ class HeaderCrudController extends AbstractCrudController
         } else { // Sinon (par exemple, Crud::PAGE_NEW et Crud::PAGE_EDIT), utilisez le champ Field avec VichImageType
             $imageField = Field::new('imageFile', 'header.image')
                 ->setFormType(VichImageType::class)
+                ->setFormTypeOptions([
+                    'required' => false,
+                    'allow_delete' => false,
+                    'download_uri' => false,
+                ])
                 ->setRequired(false);
         }
         yield $imageField;

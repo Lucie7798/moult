@@ -28,4 +28,5 @@ header:
     edit_title: "Modifier un en-tête"
     buttonTitle: "Titre du bouton"
     buttonUrl: "Lien du bouton"
+    header.page: "Page"
 

@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\Header;
+use App\Repository\HeaderRepository;
 use App\Repository\GenderRepository;
 use App\Repository\ProductRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,20 +14,23 @@ class ProductController extends AbstractController
 {
     private $productRepository;
     private $genderRepository;
+    private $headerRepository;
 
-    public function __construct(ProductRepository $productRepository, GenderRepository $genderRepository)
-    {
+    public function __construct(
+        ProductRepository $productRepository,
+        GenderRepository $genderRepository,
+        HeaderRepository $headerRepository
+    ) {
         $this->productRepository = $productRepository;
         $this->genderRepository = $genderRepository;
+        $this->headerRepository = $headerRepository;
     }
-    
-    #[Route("/homme", name: "app_products_homme")]
 
-    public function listHomme(ManagerRegistry $doctrine): Response
+    #[Route("/homme", name: "app_products_homme")]
+    public function listHomme(): Response
     {
-        $headerRepository = $doctrine->getRepository(Header::class);
-        $header = $headerRepository->findOneBy([]);
-        $homme = $this->genderRepository->findOneBy(['name' => 'femme']);
+        $header = $this->headerRepository->findActiveHeaderForPage('homme');
+        $homme = $this->genderRepository->findOneBy(['name' => 'homme']);
         $products = $this->productRepository->findBy(['gender' => $homme]);
 
         return $this->render('product/homme/list.html.twig', [
@@ -38,11 +40,9 @@ class ProductController extends AbstractController
     }
 
     #[Route("/femme", name: "app_products_femme")]
-
-    public function listFemme(ManagerRegistry $doctrine): Response
+    public function listFemme(): Response
     {
-        $headerRepository = $doctrine->getRepository(Header::class);
-        $header = $headerRepository->findOneBy([]);
+        $header = $this->headerRepository->findActiveHeaderForPage('femme');
         $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
         $products = $this->productRepository->findBy(['gender' => $femme]);
 

@@ -49,6 +49,19 @@ class HeaderRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findActiveHeaderForPage(string $page): ?Header
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.active = :active')
+            ->andWhere('h.page = :page')
+            ->setParameter('active', true)
+            ->setParameter('page', $page)
+            ->orderBy('h.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
 //    /**
 //     * @return Header[] Returns an array of Header objects

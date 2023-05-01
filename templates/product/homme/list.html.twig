@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'partials/_product_card.html.twig' with {'products': products, 'sectionTitle': "Produits pour Homme"} %}
+	{% include 'partials/_header.html.twig' with {'header': header} %}
+	{% include 'partials/_product_cards.html.twig' with {'products': products, 'title': "Produits pour Homme"} %}
 {% endblock %}
 
