@@ -64,7 +64,7 @@ class Size
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getSize() === $this) {
+            if ($product->getSizes() === $this) {
             }
         }
 

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du produit :
+	{{ product.name }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mx-auto px-4 my-12">
+		<div class="flex flex-wrap">
+			<div
+				class="w-full md:w-1/2">
+				{# Image du produit #}
+				<img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" class="w-full h-auto">
+			</div>
+			<div class="w-full md:w-1/2 px-4">
+				<h2 class="text-3xl font-semibold mb-6">{{ product.name }}</h2>
+				<p>{{ product.description }}</p>
+				<div class="mt-8">
+					<h3 class="text-xl font-semibold mb-4">Couleurs :</h3>
+					<div class="flex flex-wrap">
+						{% for color in product.colors %}
+							<button class="w-8 h-8 rounded-full mr-2 mb-2" style="background-color: {{ color.hexCode }}"></button>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="mt-8">
+					<h3 class="text-xl font-semibold mb-4">Tailles :</h3>
+					<div class="flex flex-wrap">
+						{% for size in product.sizes %}
+							<button class="fb-button fb-button-secondary mr-2 mb-2">{{ size.name }}</button>
+						{% endfor %}
+					</div>
+				</div>
+				{# Ajouter ici la section pour les options de manche si le produit est une veste #}
+				{% if product.sleeveOptions|length > 0 %}
+					<div class="mt-8">
+						<h3 class="text-xl font-semibold mb-4">Options de manche :</h3>
+						<div class="flex flex-wrap">
+							{% for sleeveOption in product.sleeveOptions %}
+								<button class="fb-button fb-button-secondary mr-2 mb-2">{{ sleeveOption.sleeve.name }}</button>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+				<div class="mt-8">
+					<span class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
+						€</span>
+					<button class="fb-button fb-button-primary ml-4">Ajouter au panier</button>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+

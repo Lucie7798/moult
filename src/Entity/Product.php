@@ -203,7 +203,7 @@ class Product
         return $this;
     }
 
-    public function getSize(): Collection
+    public function getSizes(): Collection
     {
         return $this->sizes;
     }
@@ -227,7 +227,7 @@ class Product
         return $this;
     }
 
-    public function getColor(): Collection
+    public function getColors(): Collection
     {
         return $this->colors;
     }

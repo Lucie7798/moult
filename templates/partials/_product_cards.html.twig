@@ -1,27 +1,35 @@
 <section class="container mx-auto px-4 my-12">
-	<h2 class="text-3xl font-semibold mb-6">{{ title }}</h2>
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-		{% for product in products %}
-			<div class="fb-card w-full h-full">
-				<a href="{{ path('app_product', {'id': product.id}) }}" class="fb-card-media">
-					<img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}"/>
-				</a>
-				<div class="fb-card-body">
-					<a href="{{ path('app_product', {'id': product.id}) }}">
-						<h5 class="fb-card-title">{{ product.name }}</h5>
-					</a>
-					<p class="fb-card-text">{{ product.description|striptags }}</p>
-					<div class="flex items-center justify-between mt-5">
-						<div class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
-							€</div>
-						<div class="flex items-center space-x-2">
-							<a href="#" class="fb-button fb-button-primary">Ajouter au panier</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+    <h2 class="text-3xl font-semibold mb-6">{{ title }}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for product in products %}
+            <div class="fb-card w-full h-full">
+                {% if product.gender.name == 'homme' %}
+                    <a href="{{ path('app_products_homme_show', {'id': product.id}) }}" class="fb-card-media">
+                {% else %}
+                    <a href="{{ path('app_products_femme_show', {'id': product.id}) }}" class="fb-card-media">
+                {% endif %}
+                    <img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}"/>
+                </a>
+                <div class="fb-card-body">
+                    {% if product.gender.name == 'homme' %}
+                        <a href="{{ path('app_products_homme_show', {'id': product.id}) }}">
+                    {% else %}
+                        <a href="{{ path('app_products_femme_show', {'id': product.id}) }}">
+                    {% endif %}
+                        <h5 class="fb-card-title">{{ product.name }}</h5>
+                    </a>
+                    <p class="fb-card-text">{{ product.description|striptags }}</p>
+                    <div class="flex items-center justify-between mt-5">
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
+                            €</div>
+                        <div class="flex items-center space-x-2">
+                            <a href="#" class="fb-button fb-button-primary">Ajouter au panier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </section>
 
 

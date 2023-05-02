@@ -64,7 +64,7 @@ class Color
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getColor() === $this) {
+            if ($product->getColors() === $this) {
             }
         }
 

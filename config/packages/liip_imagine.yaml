@@ -29,30 +29,30 @@ liip_imagine:
             filters:
                 thumbnail:
                     size: [460, 575] # Largeur et hauteur souhaitées pour les produits
-                    mode: outbound
+                    mode: inset
 
         header_large:
             filters:
                 thumbnail:
                     size: [1600, 900]
-                    mode: outbound
+                    mode: inset
 
         header_medium:
             filters:
                 thumbnail:
                     size: [1024, 576]
-                    mode: outbound
+                    mode: inset
 
         header_small:
             filters:
                 thumbnail:
                     size: [768, 432]
-                    mode: outbound
+                    mode: inset
 
         header_default:
             filters:
                 thumbnail:
                     size: [480, 270]
-                    mode: outbound
+                    mode: inset
 
 

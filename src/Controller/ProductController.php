@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Repository\HeaderRepository;
 use App\Repository\GenderRepository;
 use App\Repository\ProductRepository;
@@ -52,9 +51,21 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/products/{id<\d+>}', name: 'app_product')]
-    public function show(Product $product): Response
+    #[Route('/homme/{id<\d+>}', name: 'app_products_homme_show')]
+    public function showHomme(int $id): Response
     {
+        $product = $this->productRepository->find($id);
+
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+    #[Route('/femme/{id<\d+>}', name: 'app_products_femme_show')]
+    public function showFemme(int $id): Response
+    {
+        $product = $this->productRepository->find($id);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
