@@ -42,7 +42,13 @@ class Header
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
     #[Vich\UploadableField(mapping: 'header_image', fileNameProperty: 'image')]
     #[Assert\NotBlank(groups: ["create"], message: "Please upload an image.")]
+    #[Assert\Image(
+        maxSize: "8M",
+        maxSizeMessage: "header.image.size",
+        groups: ["create"]
+    )]
     private ?File $imageFile = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $page = null;
@@ -157,4 +163,3 @@ class Header
         return $this;
     }
 }
-

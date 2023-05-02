@@ -1,27 +1,18 @@
-<header>
-	{% if header is not null %}
-		<div class="relative w-full" style="height: 75vh;">
-			<img src="{{ vich_uploader_asset(header, 'imageFile')|imagine_filter('header_thumbnail') }}" alt="{{ header.title }}" class="object-cover w-full h-full">
-			<div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-				<div class="text-center text-white">
-					<h1 class="text-4xl font-semibold">{{ header.title }}</h1>
-					<p class="text-xl">{{ header.description }}</p>
-					<a href="{{ header.buttonUrl }}" class="inline-block px-6 py-3 mt-4 text-lg font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-700">
-						{{ header.buttonTitle }}
-					</a>
-				</div>
-			</div>
-		</div>
-	{% endif %}
+<header class="relative">
+    {% if header is not null %}
+        <div class="header-image-container relative w-full h-screen flex items-center justify-center overflow-hidden">
+            <img src="{{ vich_uploader_asset(header, 'imageFile')|imagine_filter('header_thumbnail') }}" alt="{{ header.title }}" class="object-cover w-full h-full">
+            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl font-semibold">{{ header.title }}</h1>
+                    <p class="text-xl">{{ header.description }}</p>
+                    <a href="{{ header.buttonUrl }}" class="inline-block px-6 py-3 mt-4 text-lg font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-700">
+                        {{ header.buttonTitle }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 </header>
-
-
-
-
-
-
-
-
-
 
 

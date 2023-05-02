@@ -36,7 +36,7 @@ class HeaderCrudController extends AbstractCrudController
             ->setHelp('edit', 'Remplissez les champs obligatoire *.')
             ->setFormOptions([
                 'validation_groups' => ['create', 'Default'],
-            ]);
+            ]);           
     }
 
     public function configureActions(Actions $actions): Actions
@@ -53,6 +53,7 @@ class HeaderCrudController extends AbstractCrudController
                 'Accueil' => 'home',
                 'Homme' => 'homme',
                 'Femme' => 'femme',
+                'Notre histoire' => 'our_story',
                 // Ajoutez d'autres choix de pages ici, si nécessaire
             ]);
         yield TextField::new('title')->setLabel('header.title');
@@ -64,6 +65,7 @@ class HeaderCrudController extends AbstractCrudController
                 'Page d\'accueil' => '/',
                 'Homme' => '/homme',
                 'Femme' => '/femme',
+                'Notre histoire' => '/notre-histoire',
             ]);
 
         // Images
