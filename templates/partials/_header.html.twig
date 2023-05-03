@@ -1,7 +1,9 @@
 <header class="relative">
     {% if header is not null %}
         <div class="header-image-container relative w-full h-screen flex items-center justify-center overflow-hidden">
-            <img src="{{ vich_uploader_asset(header, 'imageFile')|imagine_filter('header_thumbnail') }}" alt="{{ header.title }}" class="object-cover w-full h-full">
+            <div class="aspect-w-16 aspect-h-9 w-full h-full">
+                <img src="{{ vich_uploader_asset(header, 'imageFile')|imagine_filter('header_thumbnail') }}" alt="{{ header.title }}" class="object-cover w-full h-full">
+            </div>
             <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
                 <div class="text-center text-white">
                     <h1 class="text-4xl font-semibold">{{ header.title }}</h1>
@@ -14,5 +16,7 @@
         </div>
     {% endif %}
 </header>
+
+
 
 

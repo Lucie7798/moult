@@ -14,11 +14,14 @@ module.exports = {
         'primary': {
           500: '#5F93A5',
         },
-      }
+      },
+      height: {
+        '3/4-screen': '75vh',
+      },
     },
-    plugins: [
-      require('tw-elements/dist/plugin'),
-      require('flowbite/plugin') // add the flowbite plugin
-    ],
-  }
+  },
+  plugins: [
+    require('tw-elements/dist/plugin'),
+    require('flowbite/plugin') // add the flowbite plugin
+  ],
 }

@@ -1,0 +1,22 @@
+.header-image-container {
+    max-height: 100vh;
+}
+
+// Styles personnalisés pour la liste déroulante des options de manche
+.custom-dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+// Image miniature des manches
+.sleeve-thumbnail {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+}
+
+// ...
+.hidden {
+    display: none;
+}
+

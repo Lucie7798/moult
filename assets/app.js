@@ -11,6 +11,7 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+// Tailwind Elements
 import { 
     Collapse, 
     Dropdown, 
