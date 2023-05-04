@@ -47,8 +47,8 @@ class Header
         maxSizeMessage: "header.image.size",
         groups: ["create"]
     )]
-    private ?File $imageFile = null;
 
+    private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $page = null;
@@ -163,3 +163,4 @@ class Header
         return $this;
     }
 }
+

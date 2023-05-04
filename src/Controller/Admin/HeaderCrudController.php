@@ -13,17 +13,33 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class HeaderCrudController extends AbstractCrudController
 {
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Header::class;
     }
 
+    private function isCurrentPageNew(): bool
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        return strpos($request->getPathInfo(), '/new') !== false;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
+        $isCreatePage = $this->isCurrentPageNew();
+
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'header.list_title')
             ->setPageTitle(Crud::PAGE_NEW, 'header.new_title')
@@ -35,8 +51,8 @@ class HeaderCrudController extends AbstractCrudController
             ->setHelp('new', 'Remplissez les champs obligatoire *.')
             ->setHelp('edit', 'Remplissez les champs obligatoire *.')
             ->setFormOptions([
-                'validation_groups' => ['create', 'Default'],
-            ]);           
+                'validation_groups' => $isCreatePage ? ['create'] : ['update', 'Default'],
+            ]);
     }
 
     public function configureActions(Actions $actions): Actions
@@ -48,7 +64,7 @@ class HeaderCrudController extends AbstractCrudController
     {
         // Informations générales (title, description, buttonTitle, buttonUrl)
         yield FormField::addTab('Informations générales')->setIcon('fas fa-info');
-        yield ChoiceField::new('page')->setLabel('header.header.page')
+        yield ChoiceField::new('page')->setLabel('header.header.page')->setRequired(true)
             ->setChoices([
                 'Accueil' => 'home',
                 'Homme' => 'homme',
@@ -56,17 +72,22 @@ class HeaderCrudController extends AbstractCrudController
                 'Notre histoire' => 'our_story',
                 // Ajoutez d'autres choix de pages ici, si nécessaire
             ]);
-        yield TextField::new('title')->setLabel('header.title');
-        yield TextareaField::new('description');
+        yield TextField::new('title')->setLabel('header.title')->setRequired(false)
+            ->setFormTypeOptions(['empty_data' => '']);
+        yield TextareaField::new('description')->setRequired(false)
+            ->setFormTypeOptions(['empty_data' => '']);
         yield Field::new('active')->setLabel('Publier l\'entête ?');
-        yield TextField::new('buttonTitle')->setLabel('header.buttonTitle');
-        yield ChoiceField::new('buttonUrl')->setLabel('header.buttonUrl')
+        yield TextField::new('buttonTitle')->setLabel('header.buttonTitle')->setRequired(false)
+            ->setFormTypeOptions(['empty_data' => '']);
+        yield ChoiceField::new('buttonUrl')->setLabel('header.buttonUrl')->setRequired(false)
             ->setChoices([
+                'Aucun (pas de bouton)' => '', // Si vous ne voulez pas de lien sur le bouton
                 'Page d\'accueil' => '/',
                 'Homme' => '/homme',
                 'Femme' => '/femme',
                 'Notre histoire' => '/notre-histoire',
-            ]);
+            ])
+            ->setFormTypeOptions(['empty_data' => '']);
 
         // Images
         yield FormField::addTab('Image')->setIcon('fas fa-images');
@@ -90,7 +111,7 @@ class HeaderCrudController extends AbstractCrudController
     public function createEntity(string $entityFqcn): Header
     {
         $header = new Header();
-        $header->setActive(false);
+        $header->setActive(false); // Set default value to false
         // Set other default values for the Header entity here, if any.
 
         return $header;
