@@ -103,6 +103,7 @@ class HeaderCrudController extends AbstractCrudController
                     'allow_delete' => false,
                     'download_uri' => false,
                 ])
+                ->setHelp("Format d'image recommandé : 1080x608 pixels, JPEG ou PNG.")
                 ->setRequired(false);
         }
         yield $imageField;
