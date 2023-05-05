@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
-use App\Form\ItemImageType;
+use App\Form\ProductImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -57,8 +57,8 @@ class ProductCrudController extends AbstractCrudController
         yield MoneyField::new('price')->setLabel('product.price')->setStoredAsCents(false)->setCurrency('EUR');
 
         yield FormField::addTab('Images')->setIcon('fas fa-images');
-        yield CollectionField::new('itemImages')->setLabel('product.itemImages')
+        yield CollectionField::new('productImages')->setLabel('product.productImages')
             ->setTemplatePath('admin/product/images.html.twig')
-            ->setEntryType(ItemImageType::class);
+            ->setEntryType(ProductImageType::class);
     }
 }

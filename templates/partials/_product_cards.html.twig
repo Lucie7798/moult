@@ -8,7 +8,7 @@
                 {% else %}
                     <a href="{{ path('app_products_femme_show', {'id': product.id}) }}" class="fb-card-media">
                 {% endif %}
-                    <img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}"/>
+                    <img src="{{ asset('uploads/images/products/' ~ product.productImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}"/>
                 </a>
                 <div class="fb-card-body">
                     {% if product.gender.name == 'homme' %}

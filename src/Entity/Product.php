@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -36,8 +37,9 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Gender $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ItemImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
-    private Collection $itemImages;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid()]
+    private Collection $productImages;
 
     #[ORM\Column]
     private ?bool $isAccessory = false;
@@ -55,7 +57,7 @@ class Product
 
     public function __construct()
     {
-        $this->itemImages = new ArrayCollection();
+        $this->productImages = new ArrayCollection();
         $this->sleeveOptions = new ArrayCollection();
         $this->sizes = new ArrayCollection();
         $this->colors = new ArrayCollection();
@@ -127,29 +129,29 @@ class Product
     }
 
     /**
-     * @return Collection<int, ItemImage>
+     * @return Collection<int, ProductImage>
      */
-    public function getItemImages(): Collection
+    public function getProductImages(): Collection
     {
-        return $this->itemImages;
+        return $this->productImages;
     }
 
-    public function addItemImage(ItemImage $itemImage): self
+    public function addProductImage(ProductImage $productImage): self
     {
-        if (!$this->itemImages->contains($itemImage)) {
-            $this->itemImages->add($itemImage);
-            $itemImage->setProduct($this);
+        if (!$this->productImages->contains($productImage)) {
+            $this->productImages->add($productImage);
+            $productImage->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeItemImage(ItemImage $itemImage): self
+    public function removeProductImage(ProductImage $productImage): self
     {
-        if ($this->itemImages->removeElement($itemImage)) {
+        if ($this->productImages->removeElement($productImage)) {
             // set the owning side to null (unless already changed)
-            if ($itemImage->getProduct() === $this) {
-                $itemImage->setProduct(null);
+            if ($productImage->getProduct() === $this) {
+                $productImage->setProduct(null);
             }
         }
 

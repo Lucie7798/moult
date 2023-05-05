@@ -1,7 +1,7 @@
 {% set product = entity.instance %}
 
-{% for itemImages in product.itemImages %}
-	<img src="{{ vich_uploader_asset(itemImages, 'pathFile')|imagine_filter('admin_thumbnail') }}">
+{% for productImages in product.productImages %}
+	<img src="{{ vich_uploader_asset(productImages, 'pathFile')|imagine_filter('admin_thumbnail') }}">
 
 {% else %}
 	<span class="badge badge-secondary">

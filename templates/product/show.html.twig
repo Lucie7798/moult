@@ -10,7 +10,7 @@
 			<div
 				class="w-full md:w-1/2">
 				{# Image du produit #}
-				<img src="{{ asset('uploads/images/products/' ~ product.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" class="w-full h-auto">
+				<img src="{{ asset('uploads/images/products/' ~ product.productImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" class="w-full h-auto">
 			</div>
 			<div class="w-full md:w-1/2 px-4">
 				<h2 class="text-3xl font-semibold mb-6">{{ product.name }}</h2>

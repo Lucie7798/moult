@@ -12,7 +12,7 @@ product:
     price: "Prix"
     category: "Catégorie"
     gender: "Genre"
-    itemImages: "Images"
+    productImages: "Images"
     list_title: "Liste des produits"
     new_title: "Ajouter un produit"
     edit_title: "Modifier un produit"

@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ItemImageRepository;
+use App\Repository\ProductImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Entity(repositoryClass: ItemImageRepository::class)]
+#[ORM\Entity(repositoryClass: ProductImageRepository::class)]
+#[ORM\UniqueConstraint(columns: ['product_id', 'position'])]
+#[UniqueEntity(fields: ['product', 'position'], message: 'Vous ne pouvez pas avoir 2 fois la même position d\image pour un même produit')]
 #[Vich\Uploadable]
-class ItemImage
+class ProductImage
 {
     use TimestampableEntity;
 
@@ -25,8 +28,8 @@ class ItemImage
     #[ORM\Column]
     private ?int $position = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemImages')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(inversedBy: 'productImages')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Product $product = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
