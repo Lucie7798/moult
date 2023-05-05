@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProductImageRepository::class)]
 #[ORM\UniqueConstraint(columns: ['product_id', 'position'])]
-#[UniqueEntity(fields: ['product', 'position'], message: 'Vous ne pouvez pas avoir 2 fois la même position d\image pour un même produit')]
+#[UniqueEntity(fields: ['product', 'position'], message: 'Vous ne pouvez pas avoir 2 fois la même position d\'image pour un même produit')]
 #[Vich\Uploadable]
 class ProductImage
 {
@@ -79,7 +79,7 @@ class ProductImage
 
     public function __toString()
     {
-        return $this->path;
+        return $this->getPath() ?? '-';
     }
 
     /**
