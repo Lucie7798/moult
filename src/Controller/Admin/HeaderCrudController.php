@@ -6,7 +6,9 @@ use App\Entity\Header;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -38,6 +40,7 @@ class HeaderCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
+
         $isCreatePage = $this->isCurrentPageNew();
 
         return $crud
@@ -53,6 +56,15 @@ class HeaderCrudController extends AbstractCrudController
             ->setFormOptions([
                 'validation_groups' => $isCreatePage ? ['create'] : ['update', 'Default'],
             ]);
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('page')
+            ->add('title')
+            ->add('description')
+            ->add('active');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -76,7 +88,7 @@ class HeaderCrudController extends AbstractCrudController
             ->setFormTypeOptions(['empty_data' => '']);
         yield TextareaField::new('description')->setRequired(false)
             ->setFormTypeOptions(['empty_data' => '']);
-        yield Field::new('active')->setLabel('Publier l\'entête ?');
+        // Suppression de l'ancien champ active
         yield TextField::new('buttonTitle')->setLabel('header.buttonTitle')->setRequired(false)
             ->setFormTypeOptions(['empty_data' => '']);
         yield ChoiceField::new('buttonUrl')->setLabel('header.buttonUrl')->setRequired(false)
@@ -95,6 +107,8 @@ class HeaderCrudController extends AbstractCrudController
             $imageField = ImageField::new('image')
                 ->setBasePath('/uploads/images/headers')
                 ->setLabel('header.image');
+            // Add BooleanField for active status in listing and detail page
+            yield BooleanField::new('active', 'Publié ?');
         } else { // Sinon (par exemple, Crud::PAGE_NEW et Crud::PAGE_EDIT), utilisez le champ Field avec VichImageType
             $imageField = Field::new('imageFile', 'header.image')
                 ->setFormType(VichImageType::class)
