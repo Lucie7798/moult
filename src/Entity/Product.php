@@ -43,10 +43,7 @@ class Product
     #[Assert\Valid()]
     private Collection $productImages;
 
-    #[ORM\Column]
-    private ?bool $isAccessory = false;
-
-    #[ORM\OneToMany(mappedBy: 'jacket', targetEntity: SleeveOption::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: SleeveOption::class, orphanRemoval: true)]
     private Collection $sleeveOptions;
 
     #[ORM\ManyToMany(targetEntity: Size::class, inversedBy: 'products')]
@@ -165,18 +162,6 @@ class Product
         return $this->name;
     }
 
-    public function isIsAccessory(): ?bool
-    {
-        return $this->isAccessory;
-    }
-
-    public function setIsAccessory(?bool $isAccessory): self
-    {
-        $this->isAccessory = $isAccessory;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, SleeveOption>
      */
@@ -189,7 +174,7 @@ class Product
     {
         if (!$this->sleeveOptions->contains($sleeveOption)) {
             $this->sleeveOptions->add($sleeveOption);
-            $sleeveOption->setJacket($this);
+            $sleeveOption->setProduct($this);
         }
 
         return $this;
@@ -199,13 +184,14 @@ class Product
     {
         if ($this->sleeveOptions->removeElement($sleeveOption)) {
             // set the owning side to null (unless already changed)
-            if ($sleeveOption->getJacket() === $this) {
-                $sleeveOption->setJacket(null);
+            if ($sleeveOption->getProduct() === $this) {
+                $sleeveOption->setProduct(null);
             }
         }
 
         return $this;
     }
+
 
     public function getSizes(): Collection
     {

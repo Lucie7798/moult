@@ -6,66 +6,75 @@
 
 {% block body %}
 	<section class="container mx-auto px-4 my-12">
-		<div class="flex flex-wrap">
-			<div
-				class="w-full md:w-1/2">
-				{# Image du produit #}
-				<img src="{{ asset('uploads/images/products/' ~ product.productImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" class="w-full h-auto">
-			</div>
-			<div class="w-full md:w-1/2 px-4">
-				<h2 class="text-3xl font-semibold mb-6">{{ product.name }}</h2>
-				<p>{{ product.description }}</p>
-				<div class="mt-8">
-					<h3 class="text-xl font-semibold mb-4">Couleurs :</h3>
-					<div class="flex flex-wrap">
-						{% for color in product.colors %}
-							<button class="w-8 h-8 rounded-full mr-2 mb-2" style="background-color: {{ color.hexCode }}"></button>
-						{% endfor %}
-					</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div class="flex flex-col space-y-4">
+				{% set mainImage = product.productImages[0] %}
+				<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_large') }}" alt="Image de {{ product.name }}">
+				<div class="flex flex-row space-x-4 overflow-x-auto">
+					{% for productImage in product.productImages %}
+						<img class="w-20 h-auto cursor-pointer" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" onclick="changeMainImage(this)">
+					{% endfor %}
 				</div>
-				<div class="mt-8">
-					<h3 class="text-xl font-semibold mb-4">Tailles :</h3>
-					<div class="flex flex-wrap">
+			</div>
+			<div>
+				<h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
+				<p class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ product.price }}€</p>
+
+				<p class="mb-4">{{ product.description }}</p>
+
+				{# Tailles #}
+				<div class="mb-4">
+					<label for="size" class="block mb-2">Taille :</label>
+					<select id="size" name="size">
 						{% for size in product.sizes %}
-							<button class="fb-button fb-button-secondary mr-2 mb-2">{{ size.name }}</button>
+							<option value="{{ size }}">{{ size }}</option>
 						{% endfor %}
-					</div>
+					</select>
 				</div>
-				{# Section pour les options de manche si le produit est une veste #}
-				{% if product.sleeveOptions|length > 0 %}
-				<div class="mt-8">
-					<div class="relative inline-flex">
-						<button id="sleeveOptionsDropdownButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-							Choisissez une option de manche
-							<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-							</svg>
-						</button>
-						<div id="sleeveOptionsDropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-56 mt-2 top-full left-0 absolute dark:bg-gray-700">
-							<ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-								{% for sleeveOption in product.sleeveOptions %}
-									<li>
-										<label class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
-											<input class="hidden" type="radio" name="sleeveOption" value="{{ sleeveOption.sleeve.id }}">
-											<img class="sleeve-thumbnail inline-block mr-2" src="{{ asset('uploads/images/products/' ~ sleeveOption.sleeve.itemImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ sleeveOption.sleeve.name }}">
-											{{ sleeveOption.sleeve.name }}
-										</label>
-									</li>
-								{% endfor %}
-							</ul>
+
+				{# Couleurs #}
+				<div class="mb-4">
+					<label for="color" class="block mb-2">Couleur :</label>
+					<select id="color" name="color">
+						{% for color in product.colors %}
+							<option value="{{ color }}">{{ color }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				{# Options de manches #}
+				<div class="mb-4 sleeve-options-wrapper">
+					<label for="sleeve" class="block mb-2">Option de manche :</label>
+					<button id="sleeve-menu-button" class="fb-select relative bg-white border border-gray-300 rounded py-2 px-4 text-gray-700">
+						<span id="selected-sleeve-option">-- Sélectionnez une option de manche --</span>
+						<img id="selected-sleeve-thumbnail" class="sleeve-thumbnail" src="" alt="Selected sleeve option" style="display: none;">
+						<span class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+							<i class="fas fa-chevron-down"></i>
+						</span>
+					</button>
+					<button id="clear-sleeve-selection" class="fb-button fb-button-sm ml-2">Supprimer la sélection</button>
+					<div id="sleeve-options-menu" class="hidden absolute w-full mt-1 rounded bg-white border border-gray-300">
+						<div class="option-container">
+							{% for sleeve in sleeves %}
+								{% if sleeve.gender.id == product.gender.id %}
+									<div class="sleeve-option-item cursor-pointer flex items-center px-4 py-2 hover:bg-gray-100" data-img-src="{{ asset('uploads/images/products/' ~ sleeve.productImages[0].path) | imagine_filter('product_thumbnail') }}">
+										<img class="sleeve-thumbnail" src="{{ asset('uploads/images/products/' ~ sleeve.productImages[0].path) | imagine_filter('product_thumbnail') }}" alt="{{ sleeve.name }}">
+										{{ sleeve.name }}
+									</div>
+								{% endif %}
+							{% endfor %}
 						</div>
+
 					</div>
-				{% endif %}
-				<div class="mt-8">
-					<span class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}
-						€</span>
-					<button class="fb-button fb-button-primary ml-4">Ajouter au panier</button>
 				</div>
+
 			</div>
+
+			<button class="fb-button fb-button-primary">Ajouter au panier</button>
+
 		</div>
 	</section>
 {% endblock %}
-
 
 
 

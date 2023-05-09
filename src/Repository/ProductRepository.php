@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Gender;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,21 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findSleevesByGender(Gender $gender)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.category', 'c')
+            ->andWhere('c.name = :category_name')
+            ->andWhere('p.gender = :gender')
+            ->setParameters([
+                'category_name' => 'Manches',
+                'gender' => $gender,
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+    
 
 //    /**
 //     * @return Product[] Returns an array of Product objects

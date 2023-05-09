@@ -8,15 +8,27 @@
     align-items: center;
 }
 
+.custom-select .sleeve-option-item {
+    align-items: center;
+}
+
 // Image miniature des manches
 .sleeve-thumbnail {
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
+    width: 32px;
+    height: auto;
+    margin-right: 6px;
+}
+
+// Styles personnalisés pour la liste déroulante des options de manche
+.sleeve-options-wrapper {
+    position: relative;
+}
+
+#sleeve-options-menu {
+    width: calc(100% - 2px);
 }
 
 // ...
 .hidden {
     display: none;
 }
-

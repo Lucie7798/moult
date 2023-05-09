@@ -32,7 +32,17 @@ liip_imagine:
         product_thumbnail:
             filters:
                 thumbnail:
-                    size: [460, 575] # Largeur et hauteur souhaitées pour les produits
+                    size: [340, 340] # Largeur et hauteur souhaitées pour les produits
+                    mode: outbound
+                    options:
+                            jpeg_quality: 85
+                            png_compression_level: 8
+                            webp_quality: 85
+
+        product_large:
+            filters:
+                thumbnail: 
+                    size: [600, 750] # Largeur et hauteur souhaitées pour les produits
                     mode: inset
                     options:
                             jpeg_quality: 85
@@ -78,5 +88,15 @@ liip_imagine:
                             jpeg_quality: 85
                             png_compression_level: 8
                             webp_quality: 85
+
+        sleeve_thumbnail:
+            filters:
+                thumbnail:
+                    size: [32, 32] # Largeur et hauteur souhaitées pour l'image des manches
+                    mode: inset
+                    options:
+                        jpeg_quality: 85
+                        png_compression_level: 8
+                        webp_quality: 85
 
 

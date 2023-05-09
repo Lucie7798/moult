@@ -13,11 +13,11 @@ class SleeveOption
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sleeveOptions')]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'sleeveOptions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Product $jacket = null;
+    private ?Product $product = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sleeveOptions')]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $sleeve = null;
 
@@ -26,14 +26,14 @@ class SleeveOption
         return $this->id;
     }
 
-    public function getJacket(): ?Product
+    public function getProduct(): ?Product
     {
-        return $this->jacket;
+        return $this->product;
     }
 
-    public function setJacket(?Product $jacket): self
+    public function setProduct(?Product $product): self
     {
-        $this->jacket = $jacket;
+        $this->product = $product;
 
         return $this;
     }

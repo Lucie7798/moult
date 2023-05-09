@@ -31,10 +31,12 @@ class ProductController extends AbstractController
         $header = $this->headerRepository->findActiveHeaderForPage('homme');
         $homme = $this->genderRepository->findOneBy(['name' => 'homme']);
         $products = $this->productRepository->findBy(['gender' => $homme]);
+        $sleeves = $this->productRepository->findSleevesByGender($homme);
 
         return $this->render('product/homme/list.html.twig', [
             'header' => $header,
             'products' => $products,
+            'sleeves' => $sleeves,
         ]);
     }
 
@@ -44,10 +46,12 @@ class ProductController extends AbstractController
         $header = $this->headerRepository->findActiveHeaderForPage('femme');
         $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
         $products = $this->productRepository->findBy(['gender' => $femme]);
+        $sleeves = $this->productRepository->findSleevesByGender($femme);
 
         return $this->render('product/femme/list.html.twig', [
             'header' => $header,
             'products' => $products,
+            'sleeves' => $sleeves,
         ]);
     }
 
@@ -55,19 +59,25 @@ class ProductController extends AbstractController
     public function showHomme(int $id): Response
     {
         $product = $this->productRepository->find($id);
+        $homme = $this->genderRepository->findOneBy(['name' => 'homme']);
+        $sleeves = $this->productRepository->findSleevesByGender($homme);
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'sleeves' => $sleeves,
         ]);
     }
-
+    
     #[Route('/femme/{id<\d+>}', name: 'app_products_femme_show')]
     public function showFemme(int $id): Response
     {
         $product = $this->productRepository->find($id);
-
+        $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
+        $sleeves = $this->productRepository->findSleevesByGender($femme);
+    
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'sleeves' => $sleeves,
         ]);
-    }
+    }    
 }

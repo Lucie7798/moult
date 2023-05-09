@@ -28,10 +28,13 @@ class UserCrudController extends AbstractCrudController
     {
         yield EmailField::new('email')->setLabel('user.email');
         yield Field::new('plainPassword')->setLabel('user.password')->setHelp('Laisser vide pour ne pas changer le mot de passe')->hideOnIndex();
-        yield ChoiceField::new('roles')->setLabel('user.roles')->setChoices([
-            'Administrateur' => 'ROLE_ADMIN',
-            'Utilisateur' => 'ROLE_USER',
-        ])->allowMultipleChoices();
+        yield ChoiceField::new('roles')
+                ->setLabel('user.roles')
+                ->setChoices([
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Utilisateur' => 'ROLE_USER',
+                ])
+                ->allowMultipleChoices();
 
         yield Field::new('updatedAt')->setLabel('user.updated_at')->onlyOnIndex();
     }
