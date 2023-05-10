@@ -13,7 +13,7 @@ class SleeveOptionFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $sleeveOption = new SleeveOption();
-        $sleeveOption->setJacket($this->getReference(ProductFixtures::PRODUCT_VESTE));
+        $sleeveOption->setProduct($this->getReference(ProductFixtures::PRODUCT_VESTE));
         $sleeveOption->setSleeve($this->getReference(ProductFixtures::PRODUCT_MANCHE));
         $manager->persist($sleeveOption);
 

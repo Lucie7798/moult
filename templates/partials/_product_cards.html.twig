@@ -1,32 +1,28 @@
-<section class="container mx-auto px-4 my-12">
-    <h2 class="text-3xl font-semibold mb-6">{{ title }}</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {% for product in products %}
-            <div class="fb-card w-full h-full">
-                {% if product.gender.name == 'Homme' %}
-                    <a href="{{ path('app_products_homme_show', {'id': product.id}) }}" class="fb-card-media">
-                {% else %}
-                    <a href="{{ path('app_products_femme_show', {'id': product.id}) }}" class="fb-card-media">
-                {% endif %}
-                    <img src="{{ asset('uploads/images/products/' ~ product.productImages[0].path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" class="w-full h-full object-cover"/>
-                </a>
-                <div class="fb-card-body">
-                    {% if product.gender.name == 'Homme' %}
-                        <a href="{{ path('app_products_homme_show', {'id': product.id}) }}">
-                    {% else %}
-                        <a href="{{ path('app_products_femme_show', {'id': product.id}) }}">
-                    {% endif %}
-                        <h2 class="fb-card-title">{{ product.name }}</h2>
-                    </a>
-                    <p class="fb-card-text">{{ product.description|striptags }}</p>
-                    <div class="flex items-center justify-between mt-5">
-                        <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ product.price }}€</div>
-                        <div class="flex items-center space-x-2">
-                            <a href="#" class="fb-button fb-button-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+<section class="row mx-4 sm:mx-6 lg:mx-16 mt-4 sm:mt-6 lg:mt-16">
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+		{% for product in products %}
+			<div class="w-full max-w-sm h-auto bg-white border border-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+				{% if product.gender.name == 'Homme' %}
+					<a href="{{ path('app_products_homme_show', {'id': product.id}) }}" class="aspect-w-4 aspect-h-3">
+				{% else %}
+					<a href="{{ path('app_products_femme_show', {'id': product.id}) }}" class="aspect-w-4 aspect-h-3">
+				{% endif %}
+					<img class="object-cover mx-auto w-full rounded-t-lg" src="{{ asset('uploads/images/products/' ~ product.productImages[0].path) | imagine_filter('product_card_thumbnail') }}" alt="Image de {{ product.name }}" />
+				</a>
+				<div class="px-5 pb-5">
+					{% if product.gender.name == 'Homme' %}
+						<a href="{{ path('app_products_homme_show', {'id': product.id}) }}">
+					{% else %}
+						<a href="{{ path('app_products_femme_show', {'id': product.id}) }}">
+					{% endif %}
+						<h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h5>
+					</a>
+					<div class="flex items-center justify-between mt-5">
+						<span class="text-3xl font-bold text-gray-900 dark:text-white">{{ product.price }}€</span>
+						<a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter au panier</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 </section>

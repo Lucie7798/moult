@@ -6,6 +6,7 @@ use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class ProductFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -14,25 +15,41 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $jacket = new Product();
-        $jacket->setName('Veste');
-        $jacket->setPrice(100);
-        $jacket->setDescription('Veste en jean');
-        $jacket->setGender($this->getReference(GenderFixtures::GENDER_HOMME));
-        $jacket->setCategory($this->getReference(CategoryFixtures::CATEGORY_VESTE));
-        $jacket->setIsAccessory(false);
-        $manager->persist($jacket);
-        $this->addReference(self::PRODUCT_VESTE, $jacket);
+        $faker = Factory::create();
 
-        $sleeve = new Product();
-        $sleeve->setName('Manche');
-        $sleeve->setPrice(30);
-        $sleeve->setDescription('Manche en jean');
-        $sleeve->setGender($this->getReference(GenderFixtures::GENDER_HOMME));
-        $sleeve->setCategory($this->getReference(CategoryFixtures::CATEGORY_MANCHES));
-        $sleeve->setIsAccessory(true);
-        $manager->persist($sleeve);
-        $this->addReference(self::PRODUCT_MANCHE, $sleeve);
+        $genders = [
+            GenderFixtures::GENDER_HOMME,
+            GenderFixtures::GENDER_FEMME,
+        ];
+
+        $categories = [
+            CategoryFixtures::CATEGORY_VESTE,
+            CategoryFixtures::CATEGORY_MANCHES,
+            // Ajoutez d'autres catégories ici si nécessaire
+        ];
+
+        for ($i = 0; $i < 50; $i++) {
+            $product = new Product();
+            $product->setName($faker->word);
+            $product->setPrice($faker->randomFloat(50, 60, 100));
+            $product->setDescription($faker->sentence);
+            $product->setGender($this->getReference($faker->randomElement($genders)));
+            $product->setCategory($this->getReference($faker->randomElement($categories)));
+            $manager->persist($product);
+
+            // Ajoutez une référence pour chaque produit
+            $this->addReference('product_' . $i, $product);
+
+            // Ajoutez des références spécifiques pour les produits "Veste" et "Manche"
+            if ($product->getCategory()->getName() === 'Veste' && !$this->hasReference(self::PRODUCT_VESTE)) {
+                $this->addReference(self::PRODUCT_VESTE, $product);
+            }
+
+            if ($product->getCategory()->getName() === 'Manches' && !$this->hasReference(self::PRODUCT_MANCHE)) {
+                $this->addReference(self::PRODUCT_MANCHE, $product);
+            }
+            
+        }
 
         $manager->flush();
     }

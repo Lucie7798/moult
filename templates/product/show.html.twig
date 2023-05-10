@@ -20,7 +20,7 @@
 				<h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
 				<p class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ product.price }}€</p>
 
-				<p class="mb-4">{{ product.description }}</p>
+				<p class="mb-4">{{ product.description | raw }}</p>
 
 				{# Tailles #}
 				<div class="mb-4">

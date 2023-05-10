@@ -13,26 +13,26 @@ class GenderFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Création de l'entité 'Homme'
-        $gender = new Gender();
-        $gender->setName('Homme');
-        $manager->persist($gender);
-        $this->addReference(self::GENDER_HOMME, $gender);
+        // Check if 'Homme' already exists
+        $homme = $manager->getRepository(Gender::class)->findOneBy(['name' => 'Homme']);
+        if (!$homme) {
+            // Création de l'entité 'Homme'
+            $homme = new Gender();
+            $homme->setName('Homme');
+            $manager->persist($homme);
+        }
+        $this->addReference(self::GENDER_HOMME, $homme);
 
-        // Création de l'entité 'Femme'
-        $gender = new Gender();
-        $gender->setName('Femme');
-        $manager->persist($gender);
-        $this->addReference(self::GENDER_FEMME, $gender);
+        // Check if 'Femme' already exists
+        $femme = $manager->getRepository(Gender::class)->findOneBy(['name' => 'Femme']);
+        if (!$femme) {
+            // Création de l'entité 'Femme'
+            $femme = new Gender();
+            $femme->setName('Femme');
+            $manager->persist($femme);
+        }
+        $this->addReference(self::GENDER_FEMME, $femme);
 
         $manager->flush();
     }
-
-    public function getDependencies()
-    {
-        return [
-            CategoryFixtures::class,
-        ];
-    }
-    
 }
