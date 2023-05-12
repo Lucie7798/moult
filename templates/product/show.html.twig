@@ -6,23 +6,26 @@
 
 {% block body %}
 	<section class="container mx-auto px-4 my-12">
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div class="flex flex-col space-y-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			<div class="flex flex-col md:flex-row gap-2 md:gap-4">
 				{% set mainImage = product.productImages[0] %}
-				<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_large') }}" alt="Image de {{ product.name }}">
-				<div class="flex flex-row space-x-4 overflow-x-auto">
+				<div>
+					<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_large') }}" alt="Image de {{ product.name }}">
+				</div>
+				<div class="flex flex-col gap-2">
 					{% for productImage in product.productImages %}
 						<img class="w-20 h-auto cursor-pointer" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" alt="Image de {{ product.name }}" onclick="changeMainImage(this)">
 					{% endfor %}
 				</div>
 			</div>
+
+			{# Product details section #}
 			<div>
 				<h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
 				<p class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ product.price }}€</p>
-
 				<p class="mb-4">{{ product.description | raw }}</p>
 
-				{# Tailles #}
+				{# Sizes #}
 				<div class="mb-4">
 					<label for="size" class="block mb-2">Taille :</label>
 					<select id="size" name="size">
@@ -32,7 +35,7 @@
 					</select>
 				</div>
 
-				{# Couleurs #}
+				{# Colors #}
 				<div class="mb-4">
 					<label for="color" class="block mb-2">Couleur :</label>
 					<select id="color" name="color">
@@ -42,7 +45,7 @@
 					</select>
 				</div>
 
-				{# Options de manches #}
+				{# Sleeve options #}
 				<div class="mb-4 sleeve-options-wrapper">
 					<label for="sleeve" class="block mb-2">Option de manche :</label>
 					<button id="sleeve-menu-button" class="fb-select relative bg-white border border-gray-300 rounded py-2 px-4 text-gray-700">
@@ -64,21 +67,12 @@
 								{% endif %}
 							{% endfor %}
 						</div>
-
 					</div>
 				</div>
 
+				<!-- Move the button here -->
+				<button class="fb-button fb-button-primary">Ajouter au panier</button>
 			</div>
-
-			<button class="fb-button fb-button-primary">Ajouter au panier</button>
-
 		</div>
 	</section>
 {% endblock %}
-
-
-
-
-
-
-
