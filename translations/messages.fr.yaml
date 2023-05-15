@@ -30,3 +30,10 @@ header:
     buttonUrl: "Lien du bouton"
     header.page: "Page"
 
+    dashboard: 'Tableau de bord'
+    categories: 'Catégories'
+    products: 'Produits'
+    headers: 'Images d\'en-tête'
+    users: 'Utilisateurs'
+
+

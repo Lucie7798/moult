@@ -21,24 +21,38 @@ liip_imagine:
                     size: [1080, 608] # Largeur et hauteur souhaitées
                     mode: inset
                     options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
+                        jpeg_quality: 85
+                        png_compression_level: 8
+                        webp_quality: 85
 
         navbar_logo_thumbnail:
             filters:
                 relative_resize:
                     widen: 731
 
+        # Taille de l'image des produits miniatures
         product_thumbnail:
             filters:
                 thumbnail:
-                    size: [340, 340] # Largeur et hauteur souhaitées pour les produits
+                    size: [50, 50] # Largeur et hauteur souhaitées pour les produits
+                    mode: inset
+                    options:
+                        jpeg_quality: 85
+                        png_compression_level: 8
+                        webp_quality: 85
+                        interlace: plane
+
+        # Taille de l'image des produits
+        product_image:
+            filters:
+                thumbnail:
+                    size: [800, 800] # Largeur et hauteur souhaitées pour les produits
                     mode: outbound
                     options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
+                        jpeg_quality: 85
+                        png_compression_level: 8
+                        webp_quality: 85
+
 
         # Taille de la card des produits
         product_card_thumbnail:
@@ -50,17 +64,6 @@ liip_imagine:
                         jpeg_quality: 85
                         png_compression_level: 8
                         webp_quality: 85
-
-
-        product_large:
-            filters:
-                thumbnail: 
-                    size: [600, 750] # Largeur et hauteur souhaitées pour les produits
-                    mode: inset
-                    options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
 
         header_large:
             filters:
