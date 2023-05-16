@@ -35,7 +35,7 @@
 
 // Styles pour les images miniatures des produits
 .product-thumbnail {
-    width: 50%; // Largeur de l'image miniature
+    width: 100px; // Largeur de l'image miniature
     height: auto; // Hauteur de l'image miniature 
     object-fit: cover; /* Ajuste l'image à la taille du conteneur */
 }
@@ -44,13 +44,6 @@
     width: 100%; // Largeur de l'image principale
     height: 500px; // Hauteur de l'image principale
     object-fit: cover; // Ajuste l'image à la taille du conteneur
-}
-
-/* Sur les écrans de 768px ou plus, les images miniatures seront plus petites */
-@media (min-width: 768px) {
-    .product-thumbnail {
-        width: 50%;
-    }
 }
 
 

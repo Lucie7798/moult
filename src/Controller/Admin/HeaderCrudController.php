@@ -78,10 +78,10 @@ class HeaderCrudController extends AbstractCrudController
         yield FormField::addTab('Informations générales')->setIcon('fas fa-info');
         yield ChoiceField::new('page')->setLabel('header.header.page')->setRequired(true)
             ->setChoices([
-                'Accueil' => 'home',
-                'Homme' => 'homme',
-                'Femme' => 'femme',
-                'Notre histoire' => 'our_story',
+                'Home' => 'home',
+                'Male' => 'male',
+                'Female' => 'female',
+                'Our Story' => 'our_story',
                 // Ajoutez d'autres choix de pages ici, si nécessaire
             ]);
         yield TextField::new('title')->setLabel('header.title')->setRequired(false)
@@ -94,10 +94,10 @@ class HeaderCrudController extends AbstractCrudController
         yield ChoiceField::new('buttonUrl')->setLabel('header.buttonUrl')->setRequired(false)
             ->setChoices([
                 'Aucun (pas de bouton)' => '', // Si vous ne voulez pas de lien sur le bouton
-                'Page d\'accueil' => '/',
-                'Homme' => '/homme',
-                'Femme' => '/femme',
-                'Notre histoire' => '/notre-histoire',
+                'Home' => '/',
+                'Male' => '/male',
+                'Female' => '/female',
+                'Our Story' => '/our-story',
             ])
             ->setFormTypeOptions(['empty_data' => '']);
 

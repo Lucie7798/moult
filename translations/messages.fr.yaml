@@ -23,17 +23,21 @@ category:
 header:
     title: "Titre de l'en-tête"
     image: "Image d'en-tête"
-    list_title: "Liste des en-têtes"
-    new_title: "Ajouter un en-tête"
-    edit_title: "Modifier un en-tête"
+    header.list_title: "Liste des en-têtes"
+    header.new_title: "Ajouter un en-tête"
+    header.edit_title: "Modifier un en-tête"
     buttonTitle: "Titre du bouton"
     buttonUrl: "Lien du bouton"
     header.page: "Page"
 
-    dashboard: 'Tableau de bord'
-    categories: 'Catégories'
-    products: 'Produits'
-    headers: 'Images d\'en-tête'
-    users: 'Utilisateurs'
+dashboard: 'Tableau de bord'
+categories: 'Catégories'
+products: 'Produits'
+headers: 'Images d''en-tête'
+users: 'Utilisateurs'
 
+male: 'Homme'
+female: 'Femme'
+Our Story: 'Notre histoire'
+Home: 'Accueil'
 

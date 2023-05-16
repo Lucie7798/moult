@@ -2,7 +2,6 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
-    
     # Configure webp format
     webp:
         generate: true
@@ -35,7 +34,7 @@ liip_imagine:
             filters:
                 thumbnail:
                     size: [50, 50] # Largeur et hauteur souhaitées pour les produits
-                    mode: inset
+                    mode: outbound
                     options:
                         jpeg_quality: 85
                         png_compression_level: 8
@@ -53,66 +52,22 @@ liip_imagine:
                         png_compression_level: 8
                         webp_quality: 85
 
-
-        # Taille de la card des produits
         product_card_thumbnail:
             filters:
                 thumbnail:
-                    size: [340, 500] # Largeur et hauteur souhaitées pour les produits
-                    mode: outbound
-                    options:
-                        jpeg_quality: 85
-                        png_compression_level: 8
-                        webp_quality: 85
-
-        header_large:
-            filters:
-                thumbnail:
-                    size: [1600, 900]
+                    size: [300, 300] # Largeur et hauteur souhaitées pour les cartes produits
                     mode: inset
                     options:
                         jpeg_quality: 85
                         png_compression_level: 8
                         webp_quality: 85
-
-        header_medium:
-            filters:
-                thumbnail:
-                    size: [1024, 576]
-                    mode: inset
-                    options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
-
-        header_small:
-            filters:
-                thumbnail:
-                    size: [768, 432]
-                    mode: inset
-                    options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
-
-        header_default:
-            filters:
-                thumbnail:
-                    size: [480, 270]
-                    mode: inset
-                    options:
-                            jpeg_quality: 85
-                            png_compression_level: 8
-                            webp_quality: 85
 
         sleeve_thumbnail:
             filters:
                 thumbnail:
-                    size: [32, 32] # Largeur et hauteur souhaitées pour l'image des manches
+                    size: [50, 50] # Largeur et hauteur souhaitées pour les options de manches
                     mode: inset
                     options:
                         jpeg_quality: 85
                         png_compression_level: 8
                         webp_quality: 85
-
-

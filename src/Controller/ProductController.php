@@ -25,59 +25,67 @@ class ProductController extends AbstractController
         $this->headerRepository = $headerRepository;
     }
 
-    #[Route("/homme", name: "app_products_homme")]
-    public function listHomme(): Response
+    #[Route("/male", name: "app_products_male")]
+    public function listMale(): Response
     {
-        $header = $this->headerRepository->findActiveHeaderForPage('homme');
-        $homme = $this->genderRepository->findOneBy(['name' => 'homme']);
-        $products = $this->productRepository->findBy(['gender' => $homme]);
-        $sleeves = $this->productRepository->findSleevesByGender($homme);
+        $header = $this->headerRepository->findActiveHeaderForPage('male');
+        $male = $this->genderRepository->findOneBy(['name' => 'male']);
+        $products = $this->productRepository->findBy(['gender' => $male]);
+        $sleeves = $this->productRepository->findSleevesByGender($male);
 
-        return $this->render('product/homme/list.html.twig', [
+        return $this->render('product/male/list.html.twig', [
             'header' => $header,
             'products' => $products,
             'sleeves' => $sleeves,
         ]);
     }
 
-    #[Route("/femme", name: "app_products_femme")]
-    public function listFemme(): Response
+    #[Route("/female", name: "app_products_female")]
+    public function listFemale(): Response
     {
-        $header = $this->headerRepository->findActiveHeaderForPage('femme');
-        $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
-        $products = $this->productRepository->findBy(['gender' => $femme]);
-        $sleeves = $this->productRepository->findSleevesByGender($femme);
+        $header = $this->headerRepository->findActiveHeaderForPage('female');
+        $female = $this->genderRepository->findOneBy(['name' => 'female']);
+        $products = $this->productRepository->findBy(['gender' => $female]);
+        $sleeves = $this->productRepository->findSleevesByGender($female);
 
-        return $this->render('product/femme/list.html.twig', [
+        return $this->render('product/female/list.html.twig', [
             'header' => $header,
             'products' => $products,
             'sleeves' => $sleeves,
         ]);
     }
 
-    #[Route('/homme/{id<\d+>}', name: 'app_products_homme_show')]
-    public function showHomme(int $id): Response
+    #[Route('/male/{id<\d+>}', name: 'app_products_male_show')]
+    public function showMale(int $id): Response
     {
         $product = $this->productRepository->find($id);
-        $homme = $this->genderRepository->findOneBy(['name' => 'homme']);
-        $sleeves = $this->productRepository->findSleevesByGender($homme);
+        if ($product->getGender()->getName() !== 'male') {
+            return $this->redirectToRoute('app_products_female_show', ['id' => $id]);
+        }
+
+        $male = $this->genderRepository->findOneBy(['name' => 'male']);
+        $sleeves = $this->productRepository->findSleevesByGender($male);
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'sleeves' => $sleeves,
         ]);
     }
-    
-    #[Route('/femme/{id<\d+>}', name: 'app_products_femme_show')]
-    public function showFemme(int $id): Response
+
+    #[Route('/female/{id<\d+>}', name: 'app_products_female_show')]
+    public function showFemale(int $id): Response
     {
         $product = $this->productRepository->find($id);
-        $femme = $this->genderRepository->findOneBy(['name' => 'femme']);
-        $sleeves = $this->productRepository->findSleevesByGender($femme);
-    
+        if ($product->getGender()->getName() !== 'female') {
+            return $this->redirectToRoute('app_products_male_show', ['id' => $id]);
+        }
+
+        $female = $this->genderRepository->findOneBy(['name' => 'female']);
+        $sleeves = $this->productRepository->findSleevesByGender($female);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'sleeves' => $sleeves,
         ]);
-    }    
+    }
 }

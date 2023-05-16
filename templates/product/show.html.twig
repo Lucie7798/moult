@@ -7,22 +7,27 @@
 {% block body %}
 	<section class="container mx-auto px-4 my-12">
 		<div
-			class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 			<!-- Product images container -->
-			<div class="grid md:grid-cols-2 gap-2">
-				{% set mainImage = product.productImages[0] %}
-				<div>
-					<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+			<div class="lg:col-span-2">
+				<div class="grid md:grid-cols-2 gap-2">
+					{% set mainImage = product.productImages[0] %}
+					<div>
+						<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+					</div>
+					<div id="thumbnail-images-container" class="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
+						{% for productImage in product.productImages %}
+							<img class="w-24 h-auto cursor-pointer product-thumbnail" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+						{% endfor %}
+					</div>
 				</div>
-				<div id="thumbnail-images-container" class="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
-					{% for productImage in product.productImages %}
-						<img class="w-24 h-auto cursor-pointer product-thumbnail" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
-					{% endfor %}
-				</div>
+				<!-- Move the button here -->
+				<button class="fb-button fb-button-primary mt-4">Ajouter au panier</button>
 			</div>
 
 			{# Product details section #}
-			<div>
+			<div
+				class="lg:col-span-1 mt-2">
 				{# Affiche le nom du produit #}
 				<h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
 				<p class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ product.price }}€</p>
@@ -72,10 +77,12 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Move the button here -->
-				<button class="fb-button fb-button-primary">Ajouter au panier</button>
 			</div>
 		</div>
 	</section>
 {% endblock %}
+
+
+
+
+
