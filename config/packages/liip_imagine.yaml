@@ -55,8 +55,8 @@ liip_imagine:
         product_card_thumbnail:
             filters:
                 thumbnail:
-                    size: [300, 300] # Largeur et hauteur souhaitées pour les cartes produits
-                    mode: inset
+                    size: [400, 600] # Largeur et hauteur souhaitées pour les cartes produits
+                    mode: outbound
                     options:
                         jpeg_quality: 85
                         png_compression_level: 8

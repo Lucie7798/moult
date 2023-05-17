@@ -7,27 +7,22 @@
 {% block body %}
 	<section class="container mx-auto px-4 my-12">
 		<div
-			class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+			class="grid grid-cols-1 md:grid-cols-2 gap-4">
 			<!-- Product images container -->
-			<div class="lg:col-span-2">
-				<div class="grid md:grid-cols-2 gap-2">
-					{% set mainImage = product.productImages[0] %}
-					<div>
-						<img id="main-product-image" class="w-full h-auto" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
-					</div>
-					<div id="thumbnail-images-container" class="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
-						{% for productImage in product.productImages %}
-							<img class="w-24 h-auto cursor-pointer product-thumbnail" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
-						{% endfor %}
-					</div>
+			<div class="grid md:grid-cols-2 gap-2">
+				{% set mainImage = product.productImages[0] %}
+				<div>
+					<img class="w-full h-[500px] object-cover" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
 				</div>
-				<!-- Move the button here -->
-				<button class="fb-button fb-button-primary mt-4">Ajouter au panier</button>
+				<div id="thumbnail-images-container" class="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
+					{% for productImage in product.productImages %}
+						<img class="w-24 h-auto cursor-pointer object-cover" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+					{% endfor %}
+				</div>
 			</div>
 
 			{# Product details section #}
-			<div
-				class="lg:col-span-1 mt-2">
+			<div>
 				{# Affiche le nom du produit #}
 				<h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
 				<p class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ product.price }}€</p>
@@ -64,12 +59,12 @@
 						</span>
 					</button>
 					<button id="clear-sleeve-selection" class="fb-button fb-button-sm ml-2">Supprimer la sélection</button>
-					<div id="sleeve-options-menu" class="hidden absolute w-full mt-1 rounded bg-white border border-gray-300">
+					<div id="sleeve-options-menu" class="invisible absolute w-full mt-1 rounded bg-white border border-gray-300">
 						<div class="option-container">
 							{% for sleeve in sleeves %}
 								{% if sleeve.gender.id == product.gender.id %}
 									<div class="sleeve-option-item cursor-pointer flex items-center px-4 py-2 hover:bg-gray-100" data-img-src="{{ asset('uploads/images/products/' ~ sleeve.productImages[0].path) | imagine_filter('sleeve_thumbnail') }}">
-										<img class="sleeve-thumbnail" src="{{ asset('uploads/images/products/' ~ sleeve.productImages[0].path) | imagine_filter('sleeve_thumbnail') }}" alt="{{ sleeve.name }}">
+										<img class="w-8 h-auto mr-1.5" src="{{ asset('uploads/images/products/' ~ sleeve.productImages[0].path) | imagine_filter('sleeve_thumbnail') }}" alt="{{ sleeve.name }}">
 										{{ sleeve.name }}
 									</div>
 								{% endif %}
@@ -77,12 +72,10 @@
 						</div>
 					</div>
 				</div>
+
+				<!-- Move the button here -->
+				<button class="fb-button fb-button-primary">Ajouter au panier</button>
 			</div>
 		</div>
 	</section>
 {% endblock %}
-
-
-
-
-

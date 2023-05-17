@@ -18,10 +18,12 @@ module.exports = {
       height: {
         '3/4-screen': '75vh',
       },
+      aspectRatio: {}, // enable aspect ratio plugin
     },
   },
   plugins: [
     require('tw-elements/dist/plugin'),
-    require('flowbite/plugin') // add the flowbite plugin
+    require('flowbite/plugin'), // add the flowbite plugin
+    require('@tailwindcss/aspect-ratio'), // require aspect ratio plugin
   ],
 }

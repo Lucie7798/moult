@@ -54,6 +54,20 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
     
+    public function findProductWithRelations(int $productId): ?Product
+    {
+        $qb = $this->createQueryBuilder('p') // Ici, 'p' est un alias pour 'Product'
+            ->leftJoin('p.gender', 'g')
+            ->leftJoin('p.category', 'c')
+            ->leftJoin('p.productImages', 'i')
+            ->leftJoin('p.sizes', 's')
+            ->leftJoin('p.colors', 'co')
+            ->addSelect('g', 'c', 'i', 's', 'co') // On sélectionne aussi les entités liées pour les charger en une seule requête
+            ->where('p.id = :id')
+            ->setParameter('id', $productId);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 
 //    /**
 //     * @return Product[] Returns an array of Product objects

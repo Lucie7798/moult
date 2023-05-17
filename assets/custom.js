@@ -5,42 +5,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedSleeveThumbnail = document.getElementById('selected-sleeve-thumbnail');
     const clearSleeveSelectionButton = document.getElementById('clear-sleeve-selection');
 
-    sleeveMenuButton.addEventListener('click', () => sleeveOptionsMenu.classList.toggle('hidden'));
+    if (sleeveMenuButton && sleeveOptionsMenu && selectedSleeveOption && selectedSleeveThumbnail && clearSleeveSelectionButton) {
+        sleeveMenuButton.addEventListener('click', () => sleeveOptionsMenu.classList.toggle('invisible'));
 
-    sleeveOptionsMenu.addEventListener('click', event => {
-        if (event.target.classList.contains('sleeve-option-item')) {
-            const selectedOption = event.target;
-            const imageUrl = selectedOption.dataset.imgSrc;
+        sleeveOptionsMenu.addEventListener('click', event => {
+            if (event.target.classList.contains('sleeve-option-item')) {
+                const selectedOption = event.target;
+                const imageUrl = selectedOption.dataset.imgSrc;
 
-            selectedSleeveThumbnail.src = imageUrl;
-            selectedSleeveThumbnail.style.display = 'inline-block';
+                selectedSleeveThumbnail.src = imageUrl;
+                selectedSleeveThumbnail.style.display = 'inline-block';
 
-            selectedSleeveOption.textContent = selectedOption.textContent;
-            sleeveOptionsMenu.classList.add('hidden');
-        }
-    });
+                selectedSleeveOption.textContent = selectedOption.textContent;
+                sleeveOptionsMenu.classList.add('invisible');
+            }
+        });
 
-    clearSleeveSelectionButton.addEventListener('click', () => {
-        selectedSleeveOption.textContent = '-- Sélectionnez une option de manche --';
-        selectedSleeveThumbnail.src = '';
-        selectedSleeveThumbnail.style.display = 'none';
-    });
+        clearSleeveSelectionButton.addEventListener('click', () => {
+            selectedSleeveOption.textContent = '-- Sélectionnez une option de manche --';
+            selectedSleeveThumbnail.src = '';
+            selectedSleeveThumbnail.style.display = 'none';
+        });
 
-    document.addEventListener('click', event => {
-        if (!sleeveMenuButton.contains(event.target) && !sleeveOptionsMenu.contains(event.target)) {
-            sleeveOptionsMenu.classList.add('hidden');
-        }
-    });
+        document.addEventListener('click', event => {
+            if (!sleeveMenuButton.contains(event.target) && !sleeveOptionsMenu.contains(event.target)) {
+                sleeveOptionsMenu.classList.add('invisible');
+            }
+        });
 
-    const buttonWidth = sleeveMenuButton.getBoundingClientRect().width;
-    sleeveOptionsMenu.style.width = `${buttonWidth}px`;
-
+    }
     const thumbnailImagesContainer = document.querySelector('.flex.flex-row.gap-2.overflow-x-auto.md\\:overflow-visible');;
-    thumbnailImagesContainer.addEventListener('click', event => {
-        if (event.target.classList.contains('product-thumbnail')) {
-            changeMainImage(event.target);
-        }
-    });
+    if (thumbnailImagesContainer) {
+        thumbnailImagesContainer.addEventListener('click', event => {
+            if (event.target.classList.contains('product-thumbnail')) {
+                changeMainImage(event.target);
+            }
+        });
+    }
 });
 
 function changeMainImage(imageElement) {
