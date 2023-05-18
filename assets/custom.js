@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     }
-    const thumbnailImagesContainer = document.querySelector('.flex.flex-row.gap-2.overflow-x-auto.md\\:overflow-visible');;
+    const thumbnailImagesContainer = document.getElementById('thumbnail-images-container');
     if (thumbnailImagesContainer) {
         thumbnailImagesContainer.addEventListener('click', event => {
             if (event.target.classList.contains('product-thumbnail')) {

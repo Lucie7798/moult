@@ -33,7 +33,7 @@ liip_imagine:
         product_thumbnail:
             filters:
                 thumbnail:
-                    size: [50, 50] # Largeur et hauteur souhaitées pour les produits
+                    size: [96, 96] # Largeur et hauteur souhaitées pour les produits
                     mode: outbound
                     options:
                         jpeg_quality: 85
@@ -55,7 +55,7 @@ liip_imagine:
         product_card_thumbnail:
             filters:
                 thumbnail:
-                    size: [400, 600] # Largeur et hauteur souhaitées pour les cartes produits
+                    size: [460, 683] # Largeur et hauteur souhaitées pour les cartes produits
                     mode: outbound
                     options:
                         jpeg_quality: 85

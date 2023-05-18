@@ -12,11 +12,11 @@
 			<div class="grid md:grid-cols-2 gap-2">
 				{% set mainImage = product.productImages[0] %}
 				<div>
-					<img class="w-full h-[500px] object-cover" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+					<img id="main-product-image" class="w-full h-[500px] object-cover main-product-image" src="{{ asset('uploads/images/products/' ~ mainImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
 				</div>
 				<div id="thumbnail-images-container" class="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
 					{% for productImage in product.productImages %}
-						<img class="w-24 h-auto cursor-pointer object-cover" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
+						<img class="w-24 h-auto cursor-pointer object-cover product-thumbnail" src="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_thumbnail') }}" data-large-image="{{ asset('uploads/images/products/' ~ productImage.path) | imagine_filter('product_image') }}" alt="Image de {{ product.name }}">
 					{% endfor %}
 				</div>
 			</div>
