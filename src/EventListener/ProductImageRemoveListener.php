@@ -26,7 +26,7 @@ class ProductImageRemoveListener
             return;
         }
 
-        $this->filesystem->remove($this->targetDirectory . '/' . $entity->getPath());
+        $this->filesystem->remove($this->targetDirectory . '/public/uploads/images/products/' . $entity->getPath());
     }
 
     public function preUpdate(PreUpdateEventArgs $args)
