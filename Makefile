@@ -148,14 +148,9 @@ npm-watch: ## Watch assets.
 .PHONY: npm-watch
 #---------------------------------------------#
 
-
-install: ## Install the project
-    symfony composer install
-    symfony console doctrine:database:create
-    make rebuild
-	
 rebuild: ## Rebuild the project
     symfony console doctrine:database:drop -f
     symfony console doctrine:database:create
     symfony console doctrine:schema:update -f
     symfony console doctrine:fixtures:load -n
+#---------------------------------------------#
