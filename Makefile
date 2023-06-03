@@ -148,6 +148,16 @@ npm-watch: ## Watch assets.
 .PHONY: npm-watch
 #---------------------------------------------#
 
+## === 🔎  TESTS =================================================
+tests: ## Run tests.
+	$(PHPUNIT) --testdox
+.PHONY: tests
+
+tests-coverage: ## Run tests with coverage.
+		$(PHPUNIT) --coverage-html var/coverage
+.PHONY: tests-coverage
+#---------------------------------------------#
+
 rebuild: ## Rebuild the project
     symfony console doctrine:database:drop -f
     symfony console doctrine:database:create

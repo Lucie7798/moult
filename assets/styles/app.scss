@@ -1,9 +1,13 @@
+// Tailwind CSS
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+// Flowbite CSS
 @import '~flowbite/dist/flowbite.min.css';
 
+// Custom CSS
 @import 'custom';
 
-
+// font awesome
+@import '~@fortawesome/fontawesome-free/css/all.min.css';

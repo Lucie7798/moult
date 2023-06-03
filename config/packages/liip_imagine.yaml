@@ -41,7 +41,7 @@ liip_imagine:
                         webp_quality: 85
                         interlace: plane
 
-        # Taille de l'image des produits
+        # Taille de l'image des produits dans détails
         product_image:
             filters:
                 thumbnail:
