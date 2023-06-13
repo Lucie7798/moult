@@ -21,6 +21,9 @@ class Color
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: "colors")]
     private Collection $products;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Code = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -67,6 +70,18 @@ class Color
             if ($product->getColors() === $this) {
             }
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->Code;
+    }
+
+    public function setCode(string $Code): self
+    {
+        $this->Code = $Code;
 
         return $this;
     }

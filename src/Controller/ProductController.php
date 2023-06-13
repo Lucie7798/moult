@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\CartRowType;
 use App\Repository\HeaderRepository;
 use App\Repository\GenderRepository;
 use App\Repository\ProductRepository;
@@ -66,9 +67,16 @@ class ProductController extends AbstractController
         $male = $this->genderRepository->findOneBy(['name' => 'male']);
         $sleeves = $this->productRepository->findSleevesByGender($male);
 
+        $form = $this->createForm(CartRowType::class, [
+            'productId' => $product->getId(),
+        ], [
+            'action' => $this->generateUrl('app_cart'),
+        ]);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'sleeves' => $sleeves,
+            'form' => $form,
         ]);
     }
 
@@ -83,9 +91,14 @@ class ProductController extends AbstractController
         $female = $this->genderRepository->findOneBy(['name' => 'female']);
         $sleeves = $this->productRepository->findSleevesByGender($female);
 
+        $form = $this->createForm(CartRowType::class, [
+            'productId' => $product->getId(),
+        ]);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'sleeves' => $sleeves,
+            'form' => $form,
         ]);
     }
 }

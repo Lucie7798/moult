@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Color;
 use App\Entity\Header;
 use App\Entity\Product;
 use App\Entity\User;
@@ -73,6 +74,11 @@ class DashboardController extends AbstractDashboardController
             $this->translator->trans('users'),
             'fas fa-users', 
             User::class
+        );
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('colors'),
+            'fas fa-palette', 
+            Color::class
         );
     }
 }
