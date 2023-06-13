@@ -19,22 +19,33 @@ product:
 
 category:
     name: "Nom de la catégorie"
+    list_title: "Liste des catégories"
+    new_title: "Ajouter une catégorie"
+    edit_title: "Modifier une catégorie"
 
 header:
     title: "Titre de l'en-tête"
     image: "Image d'en-tête"
-    header.list_title: "Liste des en-têtes"
-    header.new_title: "Ajouter un en-tête"
-    header.edit_title: "Modifier un en-tête"
+    list_title: "Liste des en-têtes"
+    new_title: "Ajouter un en-tête"
+    edit_title: "Modifier un en-tête"
     buttonTitle: "Titre du bouton"
     buttonUrl: "Lien du bouton"
     header.page: "Page"
+
+color:
+    list_title: "Liste des couleurs"
+    new_title: "Ajouter une couleur"
+    edit_title: "Modifier une couleur"
+    name: "Nom de la couleur"
+    code: "Code de la couleur"
 
 dashboard: 'Tableau de bord'
 categories: 'Catégories'
 products: 'Produits'
 headers: 'Images d''en-tête'
 users: 'Utilisateurs'
+colors: 'Couleurs'
 
 male: 'Homme'
 female: 'Femme'

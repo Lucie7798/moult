@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 sleeveOptionsMenu.classList.add('invisible');
             }
         });
-
     }
+
     const thumbnailImagesContainer = document.getElementById('thumbnail-images-container');
     if (thumbnailImagesContainer) {
         thumbnailImagesContainer.addEventListener('click', event => {
@@ -41,6 +41,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 changeMainImage(event.target);
             }
         });
+    }
+
+    const colorPicker = document.getElementById('color-picker');
+    const colorPreview = document.getElementById('color-preview');
+
+    if (colorPicker && colorPreview) {
+        // Écouter les changements de couleur sélectionnée
+        colorPicker.addEventListener('input', function () {
+            const selectedColor = colorPicker.value;
+            colorPreview.style.backgroundColor = selectedColor;
+        });
+
+        // Initialiser la couleur prévisualisée
+        const initialColor = colorPicker.value;
+        colorPreview.style.backgroundColor = initialColor;
     }
 });
 
@@ -50,3 +65,8 @@ function changeMainImage(imageElement) {
     mainImageElement.src = imageElement.dataset.largeImage;
 }
 
+// Fonction de changement de couleur principale
+function changeMainColor(color) {
+    console.log('changeMainColor called with', color);
+    // Le reste du code pour changer la couleur principale du site
+}

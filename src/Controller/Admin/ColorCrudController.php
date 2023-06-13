@@ -3,10 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Color;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
 class ColorCrudController extends AbstractCrudController
 {
@@ -15,10 +15,17 @@ class ColorCrudController extends AbstractCrudController
         return Color::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, 'color.list_title')
+            ->setPageTitle(Crud::PAGE_NEW, 'color.new_title')
+            ->setPageTitle(Crud::PAGE_EDIT, 'color.edit_title');
+    }
+
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('name');
-        yield TextareaField::new('code');
-        yield CollectionField::new('products')->hideOnForm();
+        yield TextField::new('name')->setLabel('color.name');
+        yield ColorField::new('code')->setLabel('color.code');
     }
 }

@@ -1,0 +1,11 @@
+{# admin/field/color.html.twig #}
+{% extends '@EasyAdmin/default/field.html.twig' %}
+
+{% block easyadmin_field %}
+    {% if value is not null %}
+        <div style="width: 40px; height: 20px; background-color: {{ value }};"></div>
+        {{ value }}
+    {% else %}
+        -
+    {% endif %}
+{% endblock %}
