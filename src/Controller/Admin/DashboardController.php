@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Color;
 use App\Entity\Header;
 use App\Entity\Product;
+use App\Entity\Size;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -53,7 +54,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard(
             $this->translator->trans('dashboard'),
-            'fa fa-home'
+            'fa fa-home',
         );
         yield MenuItem::linkToCrud(
             $this->translator->trans('categories'),
@@ -80,5 +81,11 @@ class DashboardController extends AbstractDashboardController
             'fas fa-palette', 
             Color::class
         );
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('sizes'),
+            'fas fa-tape',
+            Size::class
+        );
+        
     }
 }

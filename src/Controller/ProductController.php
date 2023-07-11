@@ -93,6 +93,8 @@ class ProductController extends AbstractController
 
         $form = $this->createForm(CartRowType::class, [
             'productId' => $product->getId(),
+        ], [
+            'action' => $this->generateUrl('app_cart'),
         ]);
 
         return $this->render('product/show.html.twig', [

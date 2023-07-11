@@ -108,7 +108,7 @@ class HeaderCrudController extends AbstractCrudController
                 ->setBasePath('/uploads/images/headers')
                 ->setLabel('header.image');
             // Add BooleanField for active status in listing and detail page
-            yield BooleanField::new('active', 'Publié ?');
+            yield BooleanField::new('active', 'published ?')->setLabel('header.published ?');
         } else { // Sinon (par exemple, Crud::PAGE_NEW et Crud::PAGE_EDIT), utilisez le champ Field avec VichImageType
             $imageField = Field::new('imageFile', 'header.image')
                 ->setFormType(VichImageType::class)

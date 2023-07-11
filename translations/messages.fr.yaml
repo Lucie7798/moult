@@ -12,6 +12,9 @@ product:
     price: "Prix"
     category: "Catégorie"
     gender: "Genre"
+    description: "Description"
+    colors: "Couleurs"
+    sizes: "Tailles"
     productImages: "Images"
     list_title: "Liste des produits"
     new_title: "Ajouter un produit"
@@ -32,6 +35,7 @@ header:
     buttonTitle: "Titre du bouton"
     buttonUrl: "Lien du bouton"
     header.page: "Page"
+    published ?: "Publié ?"
 
 color:
     list_title: "Liste des couleurs"
@@ -40,15 +44,21 @@ color:
     name: "Nom de la couleur"
     code: "Code de la couleur"
 
-dashboard: 'Tableau de bord'
-categories: 'Catégories'
-products: 'Produits'
-headers: 'Images d''en-tête'
-users: 'Utilisateurs'
-colors: 'Couleurs'
+size:
+    list_title: "Liste des tailles"
+    new_title: "Ajouter une taille"
+    edit_title: "Modifier une taille"
+    name: "Nom de la taille"
+
+dashboard: "Tableau de bord"
+categories: "Catégories"
+products: "Produits"
+headers: "En-têtes"
+users: "Utilisateurs"
+colors: "Couleurs"
+sizes: "Tailles"
 
 male: 'Homme'
 female: 'Femme'
-Our Story: 'Notre histoire'
-Home: 'Accueil'
-
+our Story: 'Notre histoire'
+home: 'Accueil'

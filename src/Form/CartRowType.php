@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Size;
+use App\Entity\Color;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -21,22 +23,15 @@ class CartRowType extends AbstractType
                     'min' => 1,
                 ],
             ])
-            ->add('size', ChoiceType::class, [
-                'choices' => [
-                    'Small' => 'S',
-                    'Medium' => 'M',
-                    'Large' => 'L',
-                ],
+            ->add('size', EntityType::class, [
+                'class' => Size::class,
+                'choice_label' => 'name',
             ])
-            ->add('color', ChoiceType::class, [
-                'choices' => [
-                    'Red' => 'red',
-                    'Blue' => 'blue',
-                    'Green' => 'green',
-                ],
+            ->add('color', EntityType::class, [
+                'class' => Color::class,
+                'choice_label' => 'name',
             ])
-            ->add('submit', SubmitType::class, [
-            ]);
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

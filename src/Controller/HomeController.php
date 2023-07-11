@@ -24,7 +24,7 @@ class HomeController extends AbstractController
     {
         $header = $headerRepository->findActiveHeaderForPage('our_story');
 
-        return $this->render('static_pages/notre_histoire.html.twig', [ // Mettez à jour le chemin ici
+        return $this->render('static_pages/notre_histoire.html.twig', [ 
             'header' => $header,
         ]);
     }

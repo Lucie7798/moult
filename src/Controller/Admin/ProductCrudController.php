@@ -56,6 +56,9 @@ class ProductCrudController extends AbstractCrudController
         yield TextEditorField::new('description')->hideOnIndex();
         yield MoneyField::new('price')->setLabel('product.price')->setStoredAsCents(false)->setCurrency('EUR');
 
+        yield FormField::addTab('Couleurs')->setIcon('fas fa-palette');
+        yield AssociationField::new('colors')->setLabel('product.colors')->setRequired(false);
+        
         yield FormField::addTab('Images')->setIcon('fas fa-images');
         yield CollectionField::new('productImages')->setLabel('product.productImages')
             ->setTemplatePath('admin/product/images.html.twig')
